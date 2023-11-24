@@ -7,11 +7,13 @@ from telegram.ext import CommandHandler, ContextTypes
 
 from Mikobot import StartTime, function
 from Mikobot.__main__ import get_readable_time
+from Mikobot.plugins.helper_funcs.chat_status import check_admin
 
 # <=======================================================================================================>
 
 
 # <================================================ FUNCTION =======================================================>
+@check_admin(only_dev=True)
 async def ptb_ping(update: Update, context: ContextTypes.DEFAULT_TYPE):
     msg = update.effective_message
 
