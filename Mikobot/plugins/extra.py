@@ -122,7 +122,11 @@ function(CallbackQueryHandler(close_callback, pattern="^close$", block=False))
 __help__ = """
 ➠ *Commands*:
 
-» /ping: see ping.
+» /pyroping: see pyroping.
+
+» /hyperlink <text> <link> : Creates a markdown hyperlink with the provided text and link.
+
+» /pickwinner <participant1> <participant2> ... : Picks a random winner from the provided list of participants.
 
 » /id: reply to get user id.
 """
