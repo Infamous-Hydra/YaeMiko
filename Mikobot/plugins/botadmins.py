@@ -85,6 +85,8 @@ __help__ = """
 
 » /stats: Shows bot stats.
 
+» /ping: see ping.
+
 » /gban: Global ban.
 
 » /gbanlist: Shows gban list.
