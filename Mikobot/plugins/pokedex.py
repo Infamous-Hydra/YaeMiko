@@ -5,7 +5,7 @@
 
 # <============================================== IMPORTS =========================================================>
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
-from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler
+from telegram.ext import ContextTypes, CallbackQueryHandler, CommandHandler
 
 from Mikobot import function
 from Mikobot.state import state
@@ -34,7 +34,7 @@ async def get_pokemon_info(name_or_id):
     return None
 
 
-async def pokedex(update: Update, context: CallbackContext):
+async def pokedex(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         if context.args:
             name_or_id = context.args[0]
@@ -83,7 +83,7 @@ async def pokedex(update: Update, context: CallbackContext):
         await update.message.reply_text(f"An error occurred: {str(e)}")
 
 
-async def callback_query_handler(update: Update, context: CallbackContext):
+async def callback_query_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
 
