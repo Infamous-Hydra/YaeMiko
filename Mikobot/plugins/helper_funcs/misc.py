@@ -12,7 +12,7 @@ from telegram import (
     InlineQueryResultArticle,
     InputTextMessageContent,
 )
-from telegram.constants import *
+from telegram.constants import MessageLimit, ParseMode
 from telegram.error import TelegramError
 
 from Mikobot import NO_LOAD
@@ -33,14 +33,14 @@ class EqInlineKeyboardButton(InlineKeyboardButton):
 
 
 def split_message(msg: str) -> List[str]:
-    if len(msg) < MAX_TEXT_LENGTH:
+    if len(msg) < MessageLimit.MAX_TEXT_LENGTH:
         return [msg]
 
     lines = msg.splitlines(True)
     small_msg = ""
     result = []
     for line in lines:
-        if len(small_msg) + len(line) < MAX_TEXT_LENGTH:
+        if len(small_msg) + len(line) < MessageLimit.MAX_TEXT_LENGTH:
             small_msg += line
         else:
             result.append(small_msg)
