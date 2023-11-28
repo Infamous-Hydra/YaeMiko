@@ -44,7 +44,7 @@ async def reverseImageSearch(_: Client,m: t.Message):
             htmlMessage += "<br/><br/><h3>URLS</h3><br/>"
             htmlMessage += f"<br/>".join([f"{url}" for url in urls])
             htmlMessage += "<br/><br/>By <a href='https://lexica.qewertyy.me'>LexicaAPI</a>"
-            url = telegraph.create_page("More Results",htmlMessage)
+            url = telegraph.create_page("More Results",html_content=htmlMessage)
             message += f"\n\n[More Results]({url})\nBy @LexicaAPI"
             await reply.delete()
             return await m.reply_text(message,reply_markup=btn)
