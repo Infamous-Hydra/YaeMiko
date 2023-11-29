@@ -1,13 +1,21 @@
-# Copyright 2023 Qewertyy, MIT License
+# CREATED BY: @Qewertyy
 
-import traceback,os
-from pyrogram import Client,filters, types as t
+# <============================================== IMPORTS =========================================================>
+import os
+import traceback
+
+from pyrogram import Client, filters
+from pyrogram import types as t
+
 from Mikobot import app
-from .telegraph import upload_file,telegraph
-import httpx
+from Mikobot.state import state
 
-@app.on_message(filters.command(["pp","reverse","sauce"]))
-async def reverseImageSearch(_: Client,m: t.Message):
+from .telegraph import telegraph, upload_file
+
+
+# <================================================ FUNCTIONS =====================================================>
+@app.on_message(filters.command(["p", "pp", "reverse", "sauce"]))
+async def reverseImageSearch(_: Client, m: t.Message):
     try:
         reply = await m.reply_text("`Downloading...`")
         file = None
@@ -15,8 +23,16 @@ async def reverseImageSearch(_: Client,m: t.Message):
             return await reply.edit("Reply to an image?")
         if m.reply_to_message.document is False or m.reply_to_message.photo is False:
             return await reply.edit("Reply to an image?")
-        if m.reply_to_message.document and m.reply_to_message.document.mime_type in ['image/png','image/jpg','image/jpeg'] or m.reply_to_message.photo:
-            if m.reply_to_message.document and m.reply_to_message.document.file_size > 5242880:
+        if (
+            m.reply_to_message.document
+            and m.reply_to_message.document.mime_type
+            in ["image/png", "image/jpg", "image/jpeg"]
+            or m.reply_to_message.photo
+        ):
+            if (
+                m.reply_to_message.document
+                and m.reply_to_message.document.file_size > 5242880
+            ):
                 return await reply.edit("Reply to an image?")
             file = await m.reply_to_message.download()
         else:
@@ -26,46 +42,77 @@ async def reverseImageSearch(_: Client,m: t.Message):
         os.remove(file)
         if imgUrl is None:
             return await reply.edit("Ran into an error.")
-        output = await ReverseImageSearch("google",f"https://graph.org/{imgUrl[0]}")
+        output = await ReverseImageSearch("google", f"https://graph.org/{imgUrl[0]}")
         if output is None:
             return await reply.edit("Ran into an error.")
-        message = ''
-        names = output['content']['bestResults']['names']
-        urls = output['content']['bestResults']['urls']
+        message = ""
+        names = output["content"]["bestResults"]["names"]
+        urls = output["content"]["bestResults"]["urls"]
         btn = t.InlineKeyboardMarkup(
-            [
-                [
-                    t.InlineKeyboardButton(text="Image URL",url=urls[-1])
-                ]
-            ])
+            [[t.InlineKeyboardButton(text="IMAGE URL", url=urls[-1])]]
+        )
         if len(names) > 10:
-            message = "\n".join([f"{index+1}. {name}" for index, name in enumerate(names[:10])])
-            htmlMessage = f"<br/>".join([f"{index+1}. {name}" for index, name in enumerate(names)])
+            message = "\n".join(
+                [f"{index+1}. {name}" for index, name in enumerate(names[:10])]
+            )
+            htmlMessage = f"<br/>".join(
+                [f"{index+1}. {name}" for index, name in enumerate(names)]
+            )
             htmlMessage += "<br/><br/><h3>URLS</h3><br/>"
             htmlMessage += f"<br/>".join([f"{url}" for url in urls])
-            htmlMessage += "<br/><br/>By <a href='https://lexica.qewertyy.me'>LexicaAPI</a>"
-            url = telegraph.create_page("More Results",html_content=htmlMessage)
+            htmlMessage += (
+                "<br/><br/>By <a href='https://lexica.qewertyy.me'>LexicaAPI</a>"
+            )
+            url = telegraph.create_page("More Results", html_content=htmlMessage)
             message += f"\n\n[More Results]({url})\nBy @LexicaAPI"
             await reply.delete()
-            return await m.reply_text(message,reply_markup=btn)
-        message ="\n".join([f"{index+1}. {name}" for index, name in enumerate(output['content']['bestResults']['names'])])
+            return await m.reply_text(message, reply_markup=btn)
+        message = "\n".join(
+            [
+                f"{index+1}. {name}"
+                for index, name in enumerate(output["content"]["bestResults"]["names"])
+            ]
+        )
         await reply.delete()
-        await m.reply_text(f"{message}\n\nBy @LexicaAPI",reply_markup=btn)
+        await m.reply_text(f"{message}\n\nBy @LexicaAPI", reply_markup=btn)
     except Exception as E:
         traceback.print_exc()
         return await m.reply_text("Ran into an error.")
 
-async def ReverseImageSearch(search_engine,img_url) -> dict:
+
+async def ReverseImageSearch(search_engine, img_url) -> dict:
     try:
-        client = httpx.AsyncClient()
-        response = await client.post(
+        response = await state.post(
             f"https://lexica.qewertyy.me/image-reverse/{search_engine}?img_url={img_url}",
         )
         if response.status_code != 200:
             return None
         output = response.json()
-        if output['code'] != 2:
+        if output["code"] != 2:
             return None
         return output
     except Exception as E:
         raise Exception(f"API Error: {E}")
+
+
+# <=================================================== HELP ====================================================>
+
+
+__help__ = """
+🖼 *IMAGE REVERSE*
+
+» `/p`, `/pp`, `/reverse`, `/sauce`: Reverse image search using various search engines.
+
+➠ *Usage:*
+Reply to an image with one of the above commands to perform a reverse image search.
+
+➠ *Example:*
+» `/p` - Perform a reverse image search.
+
+➠ *Note:*
+- Supported image formats: PNG, JPG, JPEG.
+- Maximum file size: 5 MB.
+"""
+
+__mod_name__ = "REVERSE"
+# <================================================ END =======================================================>
