@@ -16,8 +16,7 @@ from Mikobot.state import state
 # <=======================================================================================================>
 
 # <================================================ CONSTANTS =====================================================>
-PALM_API_URL = "https://lexica.qewertyy.me/models"
-GPT_API_URL = "https://lexica.qewertyy.me/models"
+API_URL = "https://lexica.qewertyy.me/models"
 PALM_MODEL_ID = 0
 GPT_MODEL_ID = 5
 
@@ -54,7 +53,7 @@ async def palm_chatbot(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
     api_params = {"model_id": PALM_MODEL_ID, "prompt": input_text}
-    api_response = await get_api_response("PALM", api_params, PALM_API_URL)
+    api_response = await get_api_response("PALM", api_params, API_URL)
 
     await result_msg.delete()
     await context.bot.send_message(chat_id=update.effective_chat.id, text=api_response)
@@ -76,7 +75,7 @@ async def gpt_chatbot(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
     api_params = {"model_id": GPT_MODEL_ID, "prompt": input_text}
-    api_response = await get_api_response("GPT", api_params, GPT_API_URL)
+    api_response = await get_api_response("GPT", api_params, API_URL)
 
     await result_msg.delete()
     await context.bot.send_message(chat_id=update.effective_chat.id, text=api_response)
