@@ -6,6 +6,17 @@
   <img src="https://readme-typing-svg.herokuapp.com?color=DC143C&center=true&lines=──+「+YAE+ダ+MIKO+」+──;An+Advanced+Group+Management+Bot.&width=600&height=180">
 </div>
 
+# ⚙️ INSIDER
+
+- **Smart Moderation:** Advanced moderation tools for better control over your group
+- **Custom Commands:** Create custom commands to automate repetitive tasks
+- **Interactive UI:** A sleek and responsive user interface for an intuitive experience
+- **Fully Asynchronous**
+- **Python 3.11 Support**
+- **python-telegram-bot 20+**
+- **Telegram MTProto API Framework for Python**
+- **MongoDB, SQL are used as a database**
+
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 <p align="center">
@@ -19,17 +30,6 @@
 <a href="https://github.com/Infamous-Hydra/YaeMiko"> <img src="https://img.shields.io/github/repo-size/Infamous-Hydra/YaeMiko?color=skyblue&logo=github&logoColor=blue&style=for-the-badge" /></a>
 <a href="https://github.com/Infamous-Hydra/YaeMiko/commits/Infamous-Hydra"> <img src="https://img.shields.io/github/last-commit/Infamous-Hydra/YaeMiko?color=black&logo=github&logoColor=black&style=for-the-badge" /></a>
 </p>
-
-# ⚙️ INSIDER
-
-- **Smart Moderation:** Advanced moderation tools for better control over your group
-- **Custom Commands:** Create custom commands to automate repetitive tasks
-- **Interactive UI:** A sleek and responsive user interface for an intuitive experience
-- **Fully Asynchronous**
-- **Python 3.11 Support**
-- **python-telegram-bot 20+**
-- **Telegram MTProto API Framework for Python**
-- **MongoDB, SQL are used as a database**
 
 ## ✔️ SETUP
 
