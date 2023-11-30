@@ -10,7 +10,7 @@ from telegram.error import TelegramError
 from telegram.ext import CommandHandler, ContextTypes
 
 from Mikobot import DEMONS, DEV_USERS, DRAGONS, LOGGER, OWNER_ID, WOLVES, function
-from Mikobot.plugins.helper_funcs.chat_status import check_admin
+from Mikobot.plugins.helper_funcs.chat_status import support_plus
 from Mikobot.utils.parser import mention_html
 
 # <=======================================================================================================>
@@ -41,7 +41,7 @@ async def get_users_list(context: ContextTypes.DEFAULT_TYPE, user_ids):
     ]
 
 
-@check_admin(only_dev=True)
+@support_plus
 async def botstaff(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         owner = await get_chat_member(context, OWNER_ID)
