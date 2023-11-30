@@ -154,7 +154,7 @@ async def list_all_chats(update: Update, context: ContextTypes.DEFAULT_TYPE):
 __help__ = """
 ➠ *Admins only command*:
 
-» `/Chatbot`*:* shows chatbot panel.
+» /chatbot: shows chatbot panel.
 """
 
 __mod_name__ = "CHATBOT"
