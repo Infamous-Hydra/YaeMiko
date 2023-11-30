@@ -37,7 +37,9 @@
 Show your support by starring the repository. Your encouragement is vital for the project's growth.
 
 **Fork 🍴 the Repository:**
-Before making any deployments or modifications, fork the repository. This ensures that you have your own copy to work on independently. Your contributions drive the project forward. Thank you for your support!
+Before making any deployments or modifications, fork the repository. This ensures that you have your own copy to work on independently. 
+
+Your contributions drive the project forward. Thank you for your support!
 
 ## 🛠️ DEPLOYMENT ON LOCAL HOST / VPS
 
