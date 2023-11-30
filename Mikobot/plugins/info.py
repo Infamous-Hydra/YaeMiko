@@ -22,7 +22,7 @@ from Database.sql.approve_sql import is_approved
 from Infamous.karma import START_IMG
 from Mikobot import DEV_USERS, DRAGONS, INFOPIC, OWNER_ID, function
 from Mikobot.__main__ import STATS, USER_INFO
-from Mikobot.plugins.helper_funcs.chat_status import check_admin
+from Mikobot.plugins.helper_funcs.chat_status import check_admin, support_plus
 from Mikobot.plugins.users import get_user_id
 
 # <=======================================================================================================>
@@ -195,7 +195,7 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await reply_with_text(escape(head))
 
 
-@check_admin(only_dev=True)
+@support_plus
 async def stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
     stats = "📊 <b>Miko-Bot's Statistics:</b>\n\n" + "\n".join(
         [mod.__stats__() for mod in STATS]
@@ -360,9 +360,9 @@ async def callback_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 __help__ = """
-*Overall information about you:*
+*Overall information about user:*
 
-➲ /info : Fetch information.
+» /info : Fetch information.
 """
 
 # <================================================ HANDLER =======================================================>
