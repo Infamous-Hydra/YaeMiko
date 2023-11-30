@@ -6,6 +6,39 @@
   <img src="https://readme-typing-svg.herokuapp.com?color=DC143C&center=true&lines=──+「+YAE+ダ+MIKO+」+──;An+Advanced+Group+Management+Bot.&width=600&height=180">
 </div>
 
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+<p align="center">
+<a href="https://github.com/Infamous-Hydra/YaeMiko/stargazers"><img src="https://img.shields.io/github/stars/Infamous-Hydra/YaeMiko?color=black&logo=github&logoColor=black&style=for-the-badge" alt="Stars" /></a>
+<a href="https://github.com/Infamous-Hydra/YaeMiko/network/members"> <img src="https://img.shields.io/github/forks/Infamous-Hydra/YaeMiko?color=black&logo=github&logoColor=black&style=for-the-badge" /></a>
+<a href="https://github.com/Infamous-Hydra/YaeMiko/blob/master/LICENSE"> <img src="https://img.shields.io/badge/License-MIT-blueviolet?style=for-the-badge" alt="License" /> </a>
+<a href="https://www.python.org/"> <img src="https://img.shields.io/badge/Written%20in-Python-skyblue?style=for-the-badge&logo=python" alt="Python" /> </a>
+<a href="https://pypi.org/project/python-telegram-bot/"> <img src="https://img.shields.io/pypi/v/python-telegram-bot?color=white&label=ptb&logo=python&logoColor=blue&style=for-the-badge" /></a>
+<a href="https://pypi.org/project/Telethon/"> <img src="https://img.shields.io/pypi/v/telethon?color=white&label=telethon&logo=python&logoColor=blue&style=for-the-badge" /></a>
+<a href="https://pypi.org/project/Pyrogram/"> <img src="https://img.shields.io/pypi/v/pyrogram?color=white&label=pyrogram&logo=python&logoColor=blue&style=for-the-badge" /></a>
+<a href="https://github.com/Infamous-Hydra/YaeMiko"> <img src="https://img.shields.io/github/repo-size/Infamous-Hydra/YaeMiko?color=skyblue&logo=github&logoColor=blue&style=for-the-badge" /></a>
+<a href="https://github.com/Infamous-Hydra/YaeMiko/commits/Infamous-Hydra"> <img src="https://img.shields.io/github/last-commit/Infamous-Hydra/YaeMiko?color=black&logo=github&logoColor=black&style=for-the-badge" /></a>
+</p>
+
+# ⚙️ INSIDER
+
+- **Smart Moderation:** Advanced moderation tools for better control over your group
+- **Custom Commands:** Create custom commands to automate repetitive tasks
+- **Interactive UI:** A sleek and responsive user interface for an intuitive experience
+- **Fully Asynchronous**
+- **Python 3.11 Support**
+- **python-telegram-bot 20+**
+- **Telegram MTProto API Framework for Python**
+- **MongoDB, SQL are used as a database**
+
+## ✔️ SETUP
+
+**Star ⭐ the Repository:**
+Show your support by starring the repository. Your encouragement is vital for the project's growth.
+
+**Fork 🍴 the Repository:**
+Before making any deployments or modifications, fork the repository. This ensures that you have your own copy to work on independently. Your contributions drive the project forward. Thank you for your support!
+
 ## 🛠️ DEPLOYMENT ON LOCAL HOST / VPS
 
 Initiate deployment with these sophisticated steps:
@@ -30,27 +63,6 @@ python3 -m Mikobot         # 8. Run the Bot
 # Press `Ctrl+b` and then `d` to exit Tmux Session
 ```
 ━━━━━━━━━━━━━━━━━━━━
-# ⚙️ INSIDER
-
-- Smart Moderation: Advanced moderation tools for better control over your group
-- Custom Commands: Create custom commands to automate repetitive tasks
-- Interactive UI: A sleek and responsive user interface for an intuitive experience
-- Fully asynchronous
-- Python 3.11 Support
-- python-telegram-bot 20+
-- Telegram MTProto API Framework for Python
-- MongoDB, SQL are used as database
-
-## ✔️ SETUP
-
-Star ⭐ the Repository:
-Show your support by starring the repository. Your encouragement is vital for the project's growth.
-
-Fork 🍴 the Repository:
-Before making any deployments or modifications, fork the repository. This ensures that you have your own copy to work on independently.
-
-Your contributions drive the project forward. Thank you for your support!
-
 
 <h1 align="center">Deploy on Heroku</h1>
 
@@ -62,6 +74,7 @@ Your contributions drive the project forward. Thank you for your support!
     </a>
 </p>
 
+<h1 align="center"><img src="./.github/yae-miko.gif" /></h1>
 
 ## CREDITS
 The foundation of the application is rooted in the initial efforts undertaken by [PaulSonOfLars](https://github.com/PaulSonOfLars)
