@@ -509,7 +509,8 @@ def __chat_settings__(chat_id, user_id):
 
 __help__ = f"""
 ➠ *Admins only:*
-» `/antispam <on/off/yes/no>`*:* Will toggle our antispam tech or return your current settings.
+
+» /antispam <on/off/yes/no>: Will toggle our antispam tech or return your current settings.
 
 ➠ Anti-Spam, used by bot devs to ban spammers across all groups. This helps protect \
 you and your groups by removing spam flooders as quickly as possible.
