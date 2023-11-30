@@ -439,10 +439,12 @@ async def repo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     source_link = "https://github.com/Infamous-Hydra/YaeMiko"
     message_text = f"*Here is the link for the public source repo*:\n\n{source_link}"
 
-    await context.bot.send_message(chat_id=update.effective_chat.id,
-                                   text=message_text,
-                                   parse_mode=ParseMode.MARKDOWN,
-                                   disable_web_page_preview=False)
+    await context.bot.send_message(
+        chat_id=update.effective_chat.id,
+        text=message_text,
+        parse_mode=ParseMode.MARKDOWN,
+        disable_web_page_preview=False,
+    )
 
 
 async def Miko_about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -766,7 +768,7 @@ def main():
 
     function(CommandHandler("settings", get_settings))
     function(CallbackQueryHandler(settings_button, pattern=r"stngs_"))
-    function(CommandHandler('repo', repo))
+    function(CommandHandler("repo", repo))
 
     function(CallbackQueryHandler(Miko_about_callback, pattern=r"Miko_"))
     function(CallbackQueryHandler(gitsource_callback, pattern=r"git_source"))
