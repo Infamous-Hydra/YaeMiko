@@ -82,7 +82,7 @@ async def reverseImageSearch(_: Client, m: t.Message):
 async def reverse_image_search(search_engine, img_url) -> dict:
     try:
         response = await state.post(
-            f"https://lexica.qewertyy.me/image-reverse/{search_engine}?img_url={img_url}",
+            f"https://reverse.qewertyy.me/image-reverse/{search_engine}?img_url={img_url}",
         )
         if response.status_code != 200:
             return None
