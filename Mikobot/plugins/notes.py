@@ -591,8 +591,8 @@ __help__ = """
 
  » /number : Will pull the note of that number in the list
 
- ➠ *If you would like to retrieve the contents of a note without any formatting, use `/get <notename> noformat`. This can \
-be useful when updating a current note*
+ ➠ If you would like to retrieve the contents of a note without any formatting, use `/get <notename> noformat`. This can \
+be useful when updating a current note
 
 *Admins only:*
 
