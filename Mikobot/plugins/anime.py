@@ -38,10 +38,11 @@ from pyrogram.types import (
 )
 
 from Mikobot import BOT_USERNAME, MESSAGE_DUMP, MONGO_DB_URI, app
+from Mikobot.utils.custom_filters import PREFIX_HANDLER
 
 # <=======================================================================================================>
 
-COMMAND_HANDLER = "/"
+PREFIX_HANDLER = "/"
 
 FILLERS = {}
 
@@ -3083,7 +3084,7 @@ def parse_filler(filler_id):
 
 
 @app.on_message(
-    filters.command(["anime", f"anime{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["anime", f"anime{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 @control_user
 async def anime_cmd(client: Client, message: Message, mdata: dict):
@@ -3143,7 +3144,7 @@ example: /anime Sword Art Online"""
 
 
 @app.on_message(
-    filters.command(["manga", f"manga{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["manga", f"manga{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 @control_user
 async def manga_cmd(client: Client, message: Message, mdata: dict):
@@ -3213,7 +3214,7 @@ example: /manga Sword Art Online"""
 
 
 @app.on_message(
-    filters.command(["character", f"character{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["character", f"character{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 @control_user
 async def character_cmd(client: Client, message: Message, mdata: dict):
@@ -3263,7 +3264,7 @@ async def character_cmd(client: Client, message: Message, mdata: dict):
 
 
 @app.on_message(
-    filters.command(["anilist", f"anilist{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["anilist", f"anilist{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 @control_user
 async def anilist_cmd(client: Client, message: Message, mdata: dict):
@@ -3329,9 +3330,7 @@ async def anilist_cmd(client: Client, message: Message, mdata: dict):
         await client.send_photo(gid, failed_pic, caption=msg, reply_markup=buttons)
 
 
-@app.on_message(
-    filters.command(["top", f"top{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
-)
+@app.on_message(filters.command(["top", f"top{BOT_USERNAME}"], prefixes=PREFIX_HANDLER))
 @control_user
 async def top_tags_cmd(client: Client, message: Message, mdata: dict):
     query = mdata["text"].split(" ", 1)
@@ -3360,7 +3359,7 @@ async def top_tags_cmd(client: Client, message: Message, mdata: dict):
 
 
 @app.on_message(
-    filters.command(["studio", f"studio{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["studio", f"studio{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 @control_user
 async def studio_cmd(client: Client, message: Message, mdata: dict):
@@ -3402,7 +3401,7 @@ async def studio_cmd(client: Client, message: Message, mdata: dict):
 
 
 @app.on_message(
-    filters.command(["airing", f"airing{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["airing", f"airing{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 @control_user
 async def airing_cmd(client: Client, message: Message, mdata: dict):
@@ -3484,7 +3483,7 @@ Click Headlines button to enable headlines. You can choose from given sources"""
 @app.on_message(
     ~filters.private
     & filters.command(
-        ["anisettings", f"anisettings{BOT_USERNAME}"], prefixes=COMMAND_HANDLER
+        ["anisettings", f"anisettings{BOT_USERNAME}"], prefixes=PREFIX_HANDLER
     )
 )
 @control_user
@@ -3549,7 +3548,7 @@ async def settings_cmd(client: Client, message: Message, mdata: dict):
 
 
 @app.on_message(
-    filters.command(["browse", f"browse{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["browse", f"browse{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 @control_user
 async def browse_cmd(client: Client, message: Message, mdata: dict):
@@ -3578,7 +3577,7 @@ async def browse_cmd(client: Client, message: Message, mdata: dict):
 @app.on_message(
     filters.command(
         ["gettags", f"gettags{BOT_USERNAME}", "getgenres", f"getgenres{BOT_USERNAME}"],
-        prefixes=COMMAND_HANDLER,
+        prefixes=PREFIX_HANDLER,
     )
 )
 @control_user
@@ -4729,42 +4728,42 @@ Selected text case in this group: {cs}"""
 
 
 @app.on_edited_message(
-    filters.command(["anime", f"anime{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["anime", f"anime{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 async def anime_edit_cmd(client: app, message: Message):
     await anime_cmd(client, message)
 
 
 @app.on_edited_message(
-    filters.command(["manga", f"manga{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["manga", f"manga{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 async def manga_edit_cmd(client: app, message: Message):
     await manga_cmd(client, message)
 
 
 @app.on_edited_message(
-    filters.command(["character", f"character{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["character", f"character{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 async def character_edit_cmd(client: app, message: Message):
     await character_cmd(client, message)
 
 
 @app.on_edited_message(
-    filters.command(["anilist", f"anilist{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["anilist", f"anilist{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 async def anilist_edit_cmd(client: app, message: Message):
     await anilist_cmd(client, message)
 
 
 @app.on_edited_message(
-    filters.command(["top", f"top{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["top", f"top{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 async def top_edit_cmd(client: app, message: Message):
     await top_tags_cmd(client, message)
 
 
 @app.on_edited_message(
-    filters.command(["airing", f"airing{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["airing", f"airing{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 async def airing_edit_cmd(client: app, message: Message):
     await airing_cmd(client, message)
@@ -4773,7 +4772,7 @@ async def airing_edit_cmd(client: app, message: Message):
 @app.on_edited_message(
     ~filters.private
     & filters.command(
-        ["anisettings", f"anisettings{BOT_USERNAME}"], prefixes=COMMAND_HANDLER
+        ["anisettings", f"anisettings{BOT_USERNAME}"], prefixes=PREFIX_HANDLER
     )
 )
 async def settings_edit_cmd(client: app, message: Message):
@@ -4781,7 +4780,7 @@ async def settings_edit_cmd(client: app, message: Message):
 
 
 @app.on_edited_message(
-    filters.command(["browse", f"browse{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["browse", f"browse{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 async def browse_edit_cmd(client: app, message: Message):
     await browse_cmd(client, message)
@@ -4790,7 +4789,7 @@ async def browse_edit_cmd(client: app, message: Message):
 @app.on_edited_message(
     filters.command(
         ["gettags", f"gettags{BOT_USERNAME}", "getgenres", f"getgenres{BOT_USERNAME}"],
-        prefixes=COMMAND_HANDLER,
+        prefixes=PREFIX_HANDLER,
     )
 )
 async def tags_genres_edit_cmd(client: app, message: Message):
@@ -4798,14 +4797,14 @@ async def tags_genres_edit_cmd(client: app, message: Message):
 
 
 @app.on_message(
-    filters.command(["studio", f"studio{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["studio", f"studio{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 async def studio_edit_cmd(client: Client, message: Message):
     await studio_cmd(client, message)
 
 
 @app.on_message(
-    filters.command(["schedule", f"schedule{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["schedule", f"schedule{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 @control_user
 async def get_schuled(client: Client, message: Message, mdata: dict):
@@ -4834,14 +4833,14 @@ async def ns_(client: app, cq: CallbackQuery, cdata: dict):
 
 
 @app.on_edited_message(
-    filters.command(["schedule", f"schedule{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["schedule", f"schedule{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 async def get_schuled_edit(client: Client, message: Message):
     await get_schuled(client, message)
 
 
 @app.on_message(
-    filters.command(["watch", f"watch{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["watch", f"watch{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 @control_user
 async def get_watch_order(client: Client, message: Message, mdata: dict):
@@ -4939,14 +4938,14 @@ async def wls(client: app, cq: CallbackQuery, cdata: dict):
 
 
 @app.on_edited_message(
-    filters.command(["watch", f"watch{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["watch", f"watch{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 async def get_watch_order_edit(client: Client, message: Message):
     await get_watch_order(client, message)
 
 
 @app.on_message(
-    filters.command(["fillers", f"fillers{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["fillers", f"fillers{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 @control_user
 async def fillers_cmd(client: app, message: Message, mdata: dict):
@@ -5013,7 +5012,7 @@ async def filler_btn(client: app, cq: CallbackQuery, cdata: dict):
 
 
 @app.on_message(
-    filters.command(["fillers", f"fillers{BOT_USERNAME}"], prefixes=COMMAND_HANDLER)
+    filters.command(["fillers", f"fillers{BOT_USERNAME}"], prefixes=PREFIX_HANDLER)
 )
 async def fillers_cmd(client: app, message: Message):
     await fillers_cmd(client, message)
