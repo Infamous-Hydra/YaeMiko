@@ -122,6 +122,8 @@ function(CallbackQueryHandler(close_callback, pattern="^close$", block=False))
 __help__ = """
 ➠ *Commands*:
 
+» /instadl, /insta <link>: Get instagram contents like reel video or images.
+
 » /pyroping: see pyroping.
 
 » /hyperlink <text> <link> : Creates a markdown hyperlink with the provided text and link.
