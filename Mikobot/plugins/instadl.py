@@ -20,7 +20,7 @@ API_URL = "https://karma-api2.vercel.app/instadl"  # Replace with your actual AP
 # <================================================ FUNCTION =======================================================>
 async def instadl_command_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if len(context.args) < 1:
-        update.message.reply_text("Usage: /instadl [Instagram URL]")
+        await update.message.reply_text("Usage: /instadl [Instagram URL]")
         return
 
     link = context.args[0]
@@ -47,7 +47,7 @@ async def instadl_command_handler(update: Update, context: ContextTypes.DEFAULT_
                 await update.message.reply_text("Unsupported content type.")
         else:
             await update.message.reply_text(
-                "Unable to fetch content. Please check the Instagram URL."
+                "Unable to fetch content. Please check the Instagram URL or try with another Instagram link."
             )
 
     except Exception as e:
