@@ -38,7 +38,7 @@ jikanpy==4.3.2
 lxml==4.9.3
 
 # ==== M ====
-markdown2==2.4.11
+markdown2==2.4.12
 motor==3.3.2
 
 # ==== N ====
