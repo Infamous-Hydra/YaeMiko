@@ -71,7 +71,7 @@ class AntiSpam:
         if user in self.whitelist:
             return False
         try:
-            self.limiter.consume(user)
+            self.limiter.try_acquire(user)
             return False
         except BucketFullException:
             return True
