@@ -239,13 +239,25 @@ def convert_gif(input):
             **{
                 #'vf': 'scale=512:-1',
                 "crf": "30"
-            }
+            },
         )
         .overwrite_output()
         .run()
     )
 
     return converted_name
+
+
+def mention_username(username: str, name: str) -> str:
+    """
+    Args:
+        username (:obj:`str`): The username of chat which you want to mention.
+        name (:obj:`str`): The name the mention is showing.
+
+    Returns:
+        :obj:`str`: The inline mention for the user as HTML.
+    """
+    return f'<a href="t.me/{username}">{escape(name)}</a>'
 
 
 # <================================================ END =======================================================>
