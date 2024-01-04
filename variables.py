@@ -62,7 +62,6 @@ class Config(object):
 
     # Global ban settings
     STRICT_GBAN = True
-    BAN_STICKER = ""
 
     # Temporary download directory
     TEMP_DOWNLOAD_DIRECTORY = "./"
