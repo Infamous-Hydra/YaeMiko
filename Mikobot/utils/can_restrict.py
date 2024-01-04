@@ -9,6 +9,7 @@ from Mikobot import DEV_USERS, app
 # <=======================================================================================================>
 BAN_STICKER = "CAACAgUAAxkBAAEGWC5lloYv1tiI3-KPguoH5YX-RveWugACoQ4AAi4b2FQGdUhawbi91DQE"
 
+
 # <================================================ FUNCTION =======================================================>
 def can_restrict(func: Callable) -> Callable:
     async def non_admin(_, message: Message):
