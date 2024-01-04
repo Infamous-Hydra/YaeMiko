@@ -177,13 +177,13 @@ __help__ = """
 ➠ Designate me as an admin in your channel
 
 ➠ *Commands*
-» /fsub channel_username - to initiate and customize settings for the channel.
+» /fsub channel\_username - to initiate and customize settings for the channel.
 
 ➠ *Kick things off with...*
 » /fsub - to review the current settings.
 » /fsub off - to deactivate the force subscription feature.
 
-➠ *If you disable fsub, you'll need to set it up again for it to take effect. Utilize* /fsub channel_username.
+➠ *If you disable fsub, you'll need to set it up again for it to take effect. Utilize /fsub channel\_username.*
 """
 __mod_name__ = "F-SUB"
 # <================================================ END =======================================================>
