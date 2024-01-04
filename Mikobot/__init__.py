@@ -65,7 +65,6 @@ if ENV:
     ALLOW_EXCL = os.environ.get("ALLOW_EXCL", False)
     DB_URI = os.environ.get("DATABASE_URL")
     DEL_CMDS = bool(os.environ.get("DEL_CMDS", False))
-    BAN_STICKER = bool(os.environ.get("BAN_STICKER", True))
     EVENT_LOGS = os.environ.get("EVENT_LOGS", None)
     INFOPIC = bool(os.environ.get("INFOPIC", "True"))
     MESSAGE_DUMP = os.environ.get("MESSAGE_DUMP", None)
@@ -120,7 +119,6 @@ else:
     ALLOW_EXCL = Config.ALLOW_EXCL
     DB_NAME = Config.DB_NAME
     DB_URI = Config.DATABASE_URL
-    BAN_STICKER = Config.BAN_STICKER
     MESSAGE_DUMP = Config.MESSAGE_DUMP
     SUPPORT_ID = Config.SUPPORT_ID
     DEL_CMDS = Config.DEL_CMDS
