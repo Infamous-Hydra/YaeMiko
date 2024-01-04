@@ -32,20 +32,6 @@ ALIVE_ANIMATION = [
     "https://telegra.ph//file/6efdd8e28756bc2f6e53e.mp4",
 ]
 
-BAN_GIFS = [
-    "https://telegra.ph//file/85ac1ab12c833afa1a5dd.mp4",
-]
-
-
-KICK_GIFS = [
-    "https://telegra.ph//file/79a6c527e6e6d530bcdc8.mp4",
-]
-
-
-MUTE_GIFS = [
-    "https://telegra.ph//file/b4faf6e390d72d286abdf.mp4",
-]
-
 FIRST_PART_TEXT = "✨ *ʜᴇʟʟᴏ* `{}` . . ."
 
 PM_START_TEXT = "✨ *ɪ ᴀᴍ ᴍɪᴋᴏ, ᴀ ɢᴇɴꜱʜɪɴ ɪᴍᴘᴀᴄᴛ ᴛʜᴇᴍᴇᴅ ʀᴏʙᴏᴛ ᴡʜɪᴄʜ ᴄᴀɴ ʜᴇʟᴘ ʏᴏᴜ ᴛᴏ ᴍᴀɴᴀɢᴇ ᴀɴᴅ ꜱᴇᴄᴜʀᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴡɪᴛʜ ʜᴜɢᴇ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ*"
