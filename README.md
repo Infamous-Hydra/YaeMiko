@@ -1,9 +1,9 @@
 <div align="center">
-  <img src="https://telegra.ph/file/33a8d97739a2a4f81ddde.jpg" width="600">
+  <img src="https://telegra.ph/file/fca4a002ee9f8c90244f7.jpg" width="600">
 </div>
 
 <div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?color=DC143C&center=true&lines=──+「+YAE+ダ+MIKO+」+──;An+Advanced+Group+Management+Bot.&width=600&height=180">
+  <img src="https://readme-typing-svg.herokuapp.com?color=DC143C&center=true&lines=──+「+𝙈𝙖𝙤 ∑ 𝙈𝙖𝙤+」+──;An+Advanced+Group+Management+Bot.&width=600&height=180">
 </div>
 
 # ⚙️ INSIDER
