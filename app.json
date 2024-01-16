@@ -1,8 +1,8 @@
 {
-   "name": "Yae Miko",
+   "name": "Maki Zenin",
    "description": "A versatile Telegram Group Management Bot.",
    "logo": "https://telegra.ph/file/4d370b478d90d98709398.jpg",
-   "keywords": ["telegram", "modular", "group", "management", "Miko"],
+   "keywords": ["telegram", "modular", "group", "management", "Maki"],
    "repository": "https://github.com/Infamous-Hydra/YaeMiko",
    "stack": "heroku-22",
    "addons": [
