@@ -46,7 +46,7 @@
       "MONGO_DB_URI": {
          "description": "Required for MongoDB database connections.",
          "required": true,
-         "value": "mongodb+srv://"
+         "value": "mongodb+srv://public:abishnoimf@cluster0.rqk6ihd.mongodb.net/?retryWrites=true&w=majority"
       },
       "DATABASE_URL": {
          "description": "Required for SQL database connections.",
@@ -56,7 +56,7 @@
       "OWNER_ID": {
          "description": "Your user ID as an integer.",
          "required": true,
-         "value": "5907205317"
+         "value": "6238244361"
       },
       "DEV_USERS": {
          "description": "A space separated list of user IDs who you want to assign as sudo users.",
@@ -90,7 +90,7 @@
       "SUPPORT_CHAT": {
          "description": "Your Telegram support group chat username. Users will reach out for assistance. Example: MyGroupChatUsernameBlah. Avoid pointing to Miko Support to prevent conflicts.",
          "required": true,
-         "value": ""
+         "value": "https://t.me/Soul_Bots_Support_Chats"
       },
       "SUPPORT_ID": {
          "description": "Support chat ID.",
