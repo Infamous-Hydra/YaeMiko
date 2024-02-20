@@ -10,31 +10,31 @@ class Config(object):
 
     # <================================================ REQUIRED ======================================================>
     # Telegram API configuration
-    API_ID = 6433468  # Get this value from my.telegram.org/apps
-    API_HASH = "7895dfd061f656367ccab30032"
+    API_ID = 27240462      # Get this value from my.telegram.org/apps
+    API_HASH = "e6d011e39e3e84cad1e417bda13c7dda"
 
     # Database configuration (PostgreSQL)
-    DATABASE_URL = "postgres://ierjlkr:OG4dxzO67Zret3Zii43Hhvujkg89WVry0n9KsHE@karma.db.elephantsql.com/ierjlkr"
+    DATABASE_URL = "postgres://sbnwcbdr:c0uxTz6sOeW2viw9GAmbpf3EkWIWo0LN@surus.db.elephantsql.com/sbnwcbdr"
 
     # Event logs chat ID and message dump chat ID
-    EVENT_LOGS = -1001629811868
-    MESSAGE_DUMP = -1001629811868
+    EVENT_LOGS = -1001863937035
+    MESSAGE_DUMP = -1001863937035
 
     # MongoDB configuration
-    MONGO_DB_URI = "mongodb+srv://t45:t45@cluster0.plfylpo.mongodb.net/?retryWrites=true&w=majority"
+    MONGO_DB_URI = "mongodb+srv://chrollodb:chrollodb@cluster0.fay8b9c.mongodb.net/?retryWrites=true&w=majority"
 
     # Support chat and support ID
-    SUPPORT_CHAT = "ProjectCodeXSupport"
-    SUPPORT_ID = -1001629811868
+    SUPPORT_CHAT = "EdgeBotSupport"
+    SUPPORT_ID = -1001935569492
 
     # Database name
-    DB_NAME = "MikoDB"
+    DB_NAME = "Chrollo"
 
     # Bot token
-    TOKEN = "2323839365:AAFgfdadqawlfdsM7slOa33eM_ghop"  # Get bot token from @BotFather on Telegram
+    TOKEN = "6438153237:AAGqo8xu59eceX3oLShBXfEg4b5Nn9aWHBA"  # Get bot token from @BotFather on Telegram
 
     # Owner's Telegram user ID (Must be an integer)
-    OWNER_ID = 5907205317
+    OWNER_ID = 6294805935
     # <=======================================================================================================>
 
     # <================================================ OPTIONAL ======================================================>
