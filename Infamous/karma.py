@@ -10,7 +10,7 @@ from Mikobot import BOT_USERNAME, OWNER_ID, SUPPORT_CHAT
 
 # <============================================== CONSTANTS =========================================================>
 START_IMG = [
-    https://telegra.ph/file/019238d48ece0cc6ceef2.jpg
+   "https://telegra.ph/file/019238d48ece0cc6ceef2.jpg"
 ]
 
 HEY_IMG = "https://telegra.ph/file/33a8d97739a2a4f81ddde.jpg"
@@ -28,7 +28,13 @@ ALIVE_ANIMATION = [
 
 FIRST_PART_TEXT = " *ʜᴇʟʟᴏ* `{}` . . ."
 
-PM_START_TEXT = " *Hi, I am _Chrollo Lucilfer_ an easy to use management bot that can manage your group efficiently and I provide you with various types of management tools*"
+PM_START_TEXT =*HHiHHi
+
+
+
+
+HHiHHi
+        In, I am Chrollo an easy to use management bot that can manage your group efficiently and I provide you with various types ofoftools management tools*"
 
 START_BTN = [
     [
@@ -82,3 +88,14 @@ HELP_STRINGS = """
 
 All the commands can be accessed with /
 """
+
+
+
+
+
+
+
+
+
+
+
