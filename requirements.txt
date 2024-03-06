@@ -21,7 +21,7 @@ emoji-country-flag==1.3.2
 
 # ==== F ====
 ffmpeg-python
-future==0.18.3
+future==1.0.0
 
 # ==== G ====
 gpytranslate==1.5.1
