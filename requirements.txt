@@ -6,7 +6,7 @@ alphabet-detector==0.0.7
 asyncio==3.4.3
 
 # ==== B ====
-beautifulsoup4==4.12.2
+beautifulsoup4==4.12.3
 bleach==6.1.0
 
 # ==== C ====
