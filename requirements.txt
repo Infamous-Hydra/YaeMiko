@@ -65,7 +65,7 @@ regex==2023.12.25
 requests==2.31.0
 
 # ==== S ====
-shortuuid==1.0.12
+shortuuid==1.0.13
 SQLAlchemy==1.4.49
 speedtest-cli==2.1.3
 
