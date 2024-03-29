@@ -23,7 +23,7 @@ state = AsyncClient(
 
 
 # <=============================================== ARQ SETUP ========================================================>
-ARQ_API_KEY = "RLWCED-WZASYO-AWOLTB-ITBWTP-ARQ"  # GET API KEY FROM @ARQRobot
+ARQ_API_KEY = "HISFYP-LBYKYX-UHJRVR-EWLSSR-ARQ"  # GET API KEY FROM @ARQRobot
 ARQ_API_URL = "arq.hamker.dev"
 
 arq = ARQ(ARQ_API_URL, ARQ_API_KEY, session)

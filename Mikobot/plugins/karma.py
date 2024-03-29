@@ -25,7 +25,7 @@ karma_negative_group = 4
     & filters.incoming
     & filters.reply
     & filters.regex(
-        r"^(\+|\+\+|\+1|thx|tnx|ty|tq|thank you|thanx|thanks|pro|cool|good|agree|makasih|👍|\+\+ .+)$"
+        r"^(\+|\+\+|\+1|+69|thx|tnx|ty|tq|thank you|thanx|thanks|pro|cool|good|agree|makasih|👍|\+\+ .+)$"
     )
     & ~filters.via_bot
     & ~filters.bot,

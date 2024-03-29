@@ -47,8 +47,8 @@ async def telegraph_upload(client, message):
                 os.remove(downloaded_file_name)
                 await h.edit_text(
                     f"""
-➼ **Uploaded to [Telegraph](https://telegra.ph{media_urls[0]}) in {ms + ms_two} seconds.**\n 
-➼ **Copy Link :** `https://telegra.ph{media_urls[0]}`""",
+➼ *Uploaded to [Telegraph](https://telegra.ph{media_urls[0]}) in {ms + ms_two} seconds.*\n 
+➼ *Copy Link :* `https://telegra.ph{media_urls[0]}`""",
                     disable_web_page_preview=False,
                 )
     else:
