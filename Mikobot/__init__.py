@@ -65,6 +65,7 @@ if ENV:
     ALLOW_EXCL = os.environ.get("ALLOW_EXCL", False)
     DB_URI = os.environ.get("DATABASE_URL")
     DEL_CMDS = bool(os.environ.get("DEL_CMDS", False))
+    BAN_STICKER = bool(os.environ.get("BAN_STICKER", True))
     EVENT_LOGS = os.environ.get("EVENT_LOGS", None)
     INFOPIC = bool(os.environ.get("INFOPIC", "True"))
     MESSAGE_DUMP = os.environ.get("MESSAGE_DUMP", None)
@@ -124,6 +125,7 @@ else:
     DEL_CMDS = Config.DEL_CMDS
     EVENT_LOGS = Config.EVENT_LOGS
     INFOPIC = Config.INFOPIC
+    BAN_STICKER = Config.BAN_STICKER
     LOAD = Config.LOAD
     MONGO_DB_URI = Config.MONGO_DB_URI
     NO_LOAD = Config.NO_LOAD
