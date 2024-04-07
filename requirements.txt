@@ -27,7 +27,7 @@ future==0.18.3
 gpytranslate==1.5.1
 
 # ==== H ====
-html2text==2020.1.16
+html2text==2024.2.26
 httpx[http2]
 humanize==4.9.0
 
