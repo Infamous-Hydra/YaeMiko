@@ -35,7 +35,7 @@ humanize==4.9.0
 jikanpy==4.3.2
 
 # ==== L ====
-lxml==5.2.1
+lxml==5.2.2
 
 # ==== M ====
 markdown2==2.4.13
