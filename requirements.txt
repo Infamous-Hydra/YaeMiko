@@ -62,7 +62,7 @@ python-telegram-bot==20.7
 
 # ==== R ====
 regex==2024.4.28
-requests==2.31.0
+requests==2.32.2
 
 # ==== S ====
 shortuuid==1.0.13
