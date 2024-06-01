@@ -14,7 +14,7 @@ from Database.sql.approve_sql import is_approved
 from Infamous.karma import START_IMG
 from Mikobot import DEV_USERS, DRAGONS, INFOPIC, OWNER_ID, function
 from Mikobot.__main__ import STATS, USER_INFO
-from Mikobot.plugins.helper_funcs.chat_status import support_plus
+from Mikobot.plugins.helper_funcs.chat_status import support_plus, dev_plus
 from Mikobot.plugins.users import get_user_id
 
 # <=======================================================================================================>
@@ -187,7 +187,7 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await reply_with_text(escape(head))
 
 
-@support_plus
+@dev_plus
 async def stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
     stats = "📊 <b>Miko-Bot's Statistics:</b>\n\n" + "\n".join(
         [mod.__stats__() for mod in STATS]
