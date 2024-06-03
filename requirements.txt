@@ -45,7 +45,7 @@ motor==3.4.0
 nekos.py==1.1.0
 
 # ==== O ====
-opencv-python-headless==4.9.0.80
+opencv-python-headless==4.10.0.82
 
 # ==== P ====
 Pillow==9.5.0
