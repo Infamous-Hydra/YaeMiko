@@ -78,6 +78,7 @@ python3 -m Mikobot         # 8. Run the Bot
 <h1 align="center"><img src="./.github/yae-miko.gif" /></h1>
 
 ## CREDITS
++ [Karma](https://github.com/Infamous-Hydra)
 + [PaulSonOfLars](https://github.com/PaulSonOfLars)
 + [lostb053](https://github.com/lostb053) > Anime
 + [TheHamkerCat](https://github.com/TheHamkerCat) > Python-Arq
