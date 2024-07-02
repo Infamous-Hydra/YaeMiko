@@ -43,6 +43,7 @@ motor==3.5.0
 
 # ==== N ====
 nekos.py==1.1.0
+numpy>=1.23.5
 
 # ==== O ====
 opencv-python-headless==4.9.0.80
