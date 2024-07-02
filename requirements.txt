@@ -1,5 +1,5 @@
 # ==== A ====
-aiofiles==23.2.1
+aiofiles==24.1.0
 aiohttp==3.9.5
 APScheduler==3.10.4
 alphabet-detector==0.0.7
