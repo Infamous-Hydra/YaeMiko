@@ -17,7 +17,7 @@ dateparser==1.2.0
 
 # ==== E ====
 emoji==2.11.1
-emoji-country-flag==2.0.0
+emoji-country-flag==2.0.1
 
 # ==== F ====
 ffmpeg-python
