@@ -10,7 +10,7 @@ beautifulsoup4==4.12.3
 bleach==6.1.0
 
 # ==== C ====
-cachetools==5.3.3
+cachetools==5.5.0
 
 # ==== D ====
 dateparser==1.2.0
