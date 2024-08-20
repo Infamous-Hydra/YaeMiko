@@ -205,9 +205,11 @@ async def connect_chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         ],
                     )
                 text += "╘══「 Total {} Chats 」".format(
-                    str(len(gethistory)) + " (max)"
-                    if len(gethistory) == 5
-                    else str(len(gethistory)),
+                    (
+                        str(len(gethistory)) + " (max)"
+                        if len(gethistory) == 5
+                        else str(len(gethistory))
+                    ),
                 )
                 conn_hist = InlineKeyboardMarkup(buttons)
             elif buttons:

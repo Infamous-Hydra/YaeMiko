@@ -147,25 +147,34 @@ async def get(
                     ),
                     fullname=escape_markdown(
                         " ".join(
-                            [message.from_user.first_name, message.from_user.last_name]
-                            if message.from_user.last_name
-                            else [message.from_user.first_name],
+                            (
+                                [
+                                    message.from_user.first_name,
+                                    message.from_user.last_name,
+                                ]
+                                if message.from_user.last_name
+                                else [message.from_user.first_name]
+                            ),
                         ),
                     ),
-                    username="@" + message.from_user.username
-                    if message.from_user.username
-                    else mention_markdown(
-                        message.from_user.id,
-                        message.from_user.first_name,
+                    username=(
+                        "@" + message.from_user.username
+                        if message.from_user.username
+                        else mention_markdown(
+                            message.from_user.id,
+                            message.from_user.first_name,
+                        )
                     ),
                     mention=mention_markdown(
                         message.from_user.id,
                         message.from_user.first_name,
                     ),
                     chatname=escape_markdown(
-                        message.chat.title
-                        if message.chat.type != "private"
-                        else message.from_user.first_name,
+                        (
+                            message.chat.title
+                            if message.chat.type != "private"
+                            else message.from_user.first_name
+                        ),
                     ),
                     id=message.from_user.id,
                 )
@@ -192,9 +201,9 @@ async def get(
                         parse_mode=parseMode,
                         disable_web_page_preview=True,
                         reply_markup=keyboard,
-                        message_thread_id=message.message_thread_id
-                        if chat.is_forum
-                        else None,
+                        message_thread_id=(
+                            message.message_thread_id if chat.is_forum else None
+                        ),
                     )
                 else:
                     await ENUM_FUNC_MAP[note.msgtype](
@@ -205,9 +214,9 @@ async def get(
                         parse_mode=parseMode,
                         disable_web_page_preview=True,
                         reply_markup=keyboard,
-                        message_thread_id=message.message_thread_id
-                        if chat.is_forum
-                        else None,
+                        message_thread_id=(
+                            message.message_thread_id if chat.is_forum else None
+                        ),
                     )
 
             except BadRequest as excp:
@@ -560,9 +569,9 @@ async def __import_data__(chat_id, data, message: Message):
                 caption="These files/photos failed to import due to originating "
                 "from another bot. This is a telegram API restriction, and can't "
                 "be avoided. Sorry for the inconvenience!",
-                message_thread_id=message.message_thread_id
-                if message.chat.is_forum
-                else None,
+                message_thread_id=(
+                    message.message_thread_id if message.chat.is_forum else None
+                ),
             )
 
 

@@ -14,6 +14,7 @@ from telegram.ext import (
     ContextTypes,
     MessageHandler,
 )
+from telegram.ext import filters
 from telegram.ext import filters as filters_module
 from telegram.helpers import escape_markdown, mention_html
 
@@ -379,9 +380,9 @@ async def reply_filter(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                 chat.id,
                                 sticker_id,
                                 reply_to_message_id=message.message_id,
-                                message_thread_id=message.message_thread_id
-                                if chat.is_forum
-                                else None,
+                                message_thread_id=(
+                                    message.message_thread_id if chat.is_forum else None
+                                ),
                             )
                             return
                         except BadRequest as excp:
@@ -392,9 +393,11 @@ async def reply_filter(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                 await context.bot.send_message(
                                     chat.id,
                                     "Message couldn't be sent, Is the sticker id valid?",
-                                    message_thread_id=message.message_thread_id
-                                    if chat.is_forum
-                                    else None,
+                                    message_thread_id=(
+                                        message.message_thread_id
+                                        if chat.is_forum
+                                        else None
+                                    ),
                                 )
                                 return
                             else:
@@ -412,26 +415,32 @@ async def reply_filter(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                 or message.from_user.first_name,
                             ),
                             fullname=" ".join(
-                                [
-                                    escape(message.from_user.first_name),
-                                    escape(message.from_user.last_name),
-                                ]
-                                if message.from_user.last_name
-                                else [escape(message.from_user.first_name)],
+                                (
+                                    [
+                                        escape(message.from_user.first_name),
+                                        escape(message.from_user.last_name),
+                                    ]
+                                    if message.from_user.last_name
+                                    else [escape(message.from_user.first_name)]
+                                ),
                             ),
-                            username="@" + escape(message.from_user.username)
-                            if message.from_user.username
-                            else mention_html(
-                                message.from_user.id,
-                                message.from_user.first_name,
+                            username=(
+                                "@" + escape(message.from_user.username)
+                                if message.from_user.username
+                                else mention_html(
+                                    message.from_user.id,
+                                    message.from_user.first_name,
+                                )
                             ),
                             mention=mention_html(
                                 message.from_user.id,
                                 message.from_user.first_name,
                             ),
-                            chatname=escape(message.chat.title)
-                            if message.chat.type != "private"
-                            else escape(message.from_user.first_name),
+                            chatname=(
+                                escape(message.chat.title)
+                                if message.chat.type != "private"
+                                else escape(message.from_user.first_name)
+                            ),
                             id=message.from_user.id,
                         )
                     else:
@@ -469,9 +478,9 @@ async def reply_filter(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                 filt.file_id,
                                 reply_markup=keyboard,
                                 reply_to_message_id=message.message_id,
-                                message_thread_id=message.message_thread_id
-                                if chat.is_forum
-                                else None,
+                                message_thread_id=(
+                                    message.message_thread_id if chat.is_forum else None
+                                ),
                             )
                         else:
                             await ENUM_FUNC_MAP[filt.file_type](
@@ -480,10 +489,10 @@ async def reply_filter(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                 reply_markup=keyboard,
                                 caption=filt.reply_text,
                                 reply_to_message_id=message.message_id,
-                                message_thread_id=message.message_thread_id
-                                if chat.is_forum
-                                else None,
-                                has_spoiler=filt.has_media_spoiler,
+                                message_thread_id=(
+                                    message.message_thread_id if chat.is_forum else None
+                                ),
+                                has_spoiler=filters.HAS_MEDIA_SPOILER,
                             )
                     except BadRequest:
                         await send_message(
@@ -520,9 +529,9 @@ async def reply_filter(update: Update, context: ContextTypes.DEFAULT_TYPE):
                             parse_mode=ParseMode.HTML,
                             disable_web_page_preview=True,
                             reply_markup=keyboard,
-                            message_thread_id=message.message_thread_id
-                            if chat.is_forum
-                            else None,
+                            message_thread_id=(
+                                message.message_thread_id if chat.is_forum else None
+                            ),
                         )
                     except BadRequest as excp:
                         if excp.message == "Unsupported url protocol":
@@ -559,9 +568,9 @@ async def reply_filter(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         await context.bot.send_message(
                             chat.id,
                             filt.reply,
-                            message_thread_id=message.message_thread_id
-                            if chat.is_forum
-                            else None,
+                            message_thread_id=(
+                                message.message_thread_id if chat.is_forum else None
+                            ),
                         )
                     except BadRequest as excp:
                         LOGGER.exception("Error in filters: " + excp.message)

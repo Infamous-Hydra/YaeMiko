@@ -1,15 +1,21 @@
 {
-   "name": "Yae Miko",
+   "name": "yAE-mIKO",
    "description": "A versatile Telegram Group Management Bot.",
    "logo": "https://telegra.ph/file/4d370b478d90d98709398.jpg",
    "keywords": ["telegram", "modular", "group", "management", "Miko"],
    "repository": "https://github.com/Infamous-Hydra/YaeMiko",
-   "stack": "heroku-22",
+   "stack": "heroku-24",
+   "formation": {
+      "worker": {
+         "quantity": 1,
+         "size": "eco"
+      }
+   },
    "addons": [
       {
          "plan": "heroku-postgresql",
          "options": {
-            "version": "12"
+            "version": "16"
          }
       }
    ],
@@ -17,12 +23,12 @@
       "API_ID": {
          "description": "Obtain this value from my.telegram.org/apps.",
          "required": true,
-         "value": ""
+         "value": "204"
       },
       "API_HASH": {
          "description": "Obtain this value from my.telegram.org/apps.",
          "required": true,
-         "value": ""
+         "value": "2df"
       },
       "DEL_CMDS": {
          "description": "Set this to True to delete command messages from users without the necessary permissions.",
@@ -36,12 +42,12 @@
       "EVENT_LOGS": {
          "description": "Channel for event logs to note down important bot-level events. Recommend making this public. Example: '-123456'",
          "required": true,
-         "value": ""
+         "value": "-100"
       },
       "MESSAGE_DUMP": {
          "description": "Support chat ID.",
          "required": true,
-         "value": "-1001511142636"
+         "value": "-100"
       },
       "MONGO_DB_URI": {
          "description": "Required for MongoDB database connections.",
@@ -66,7 +72,7 @@
       "DRAGONS": {
          "description": "A space separated list of user IDs who you want to assign as sudo users.",
          "required": false,
-         "value": "5907205317"
+         "value": ""
       },
       "STRICT_GBAN": {
          "description": "Enforce gbans across new groups as well as old groups. When a gbanned user talks, he will be banned.",
@@ -75,7 +81,7 @@
       "DEMONS": {
          "description": "A space separated list of user IDs who can use Gban From Your Bot",
          "required": false,
-         "value": "5907205317"
+         "value": "5555455171 5739199900"
       },
       "TIGERS": {
          "description": "A space separated list of user IDs who can not be banned by your Bot",
@@ -95,7 +101,7 @@
       "SUPPORT_ID": {
          "description": "Support chat ID.",
          "required": true,
-         "value": "-1001511142636"
+         "value": "-100"
       },
       "DB_NAME": {
          "description": "Your MongoDB name.",

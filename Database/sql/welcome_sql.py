@@ -1,3 +1,27 @@
+"""
+MIT License
+
+Copyright (c) 2022 Aʙɪsʜɴᴏɪ
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+"""
+
 import random
 import threading
 from typing import Union
@@ -7,20 +31,19 @@ from sqlalchemy import BigInteger, Boolean, Column, Integer, String, UnicodeText
 from Database.sql import BASE, SESSION
 from Mikobot.plugins.helper_funcs.msg_types import Types
 
-DEFAULT_WELCOME = "Hey {first}, how are you?"
-DEFAULT_GOODBYE = "Nice knowing you!"
+DEFAULT_WELCOME = "ʜᴇʏ {first}, ʜᴏᴡ ᴀʀᴇ ʏᴏᴜ?"
+DEFAULT_GOODBYE = "ɴɪᴄᴇ ᴋɴᴏᴡɪɴɢ ʏᴀ!"
 
 DEFAULT_WELCOME_MESSAGES = [
-    "{first} is here!",  # Discord welcome messages copied
-    "Ready player {first}",
-    "Welcome bro {first}",
+    "{first} ɪs ʜᴇʀᴇ!",  # Discord welcome messages copied
+    "ʀᴇᴀᴅʏ ᴘʟᴀʏᴇʀ {first}",
+    "ᴡᴇʟᴄᴏᴍᴇ ʙʀᴏ {first}",
 ]
 
 DEFAULT_GOODBYE_MESSAGES = [
-    "{first} will be missed.",
-    "{first} when back ?",
+    "{first} ᴡɪʟʟ ʙᴇ ᴍɪssᴇᴅ.",
+    "{first} ᴡʜᴇɴ ʙᴀᴄᴋ ?.",
 ]
-# Line 111 to 152 are references from https://bindingofisaac.fandom.com/wiki/Fortune_Telling_Machine
 
 
 class Welcome(BASE):
@@ -31,8 +54,7 @@ class Welcome(BASE):
     custom_content = Column(UnicodeText, default=None)
 
     custom_welcome = Column(
-        UnicodeText,
-        default=random.choice(DEFAULT_WELCOME_MESSAGES),
+        UnicodeText, default=random.choice(DEFAULT_WELCOME_MESSAGES)
     )
     welcome_type = Column(Integer, default=Types.TEXT.value)
 
@@ -47,9 +69,8 @@ class Welcome(BASE):
         self.should_goodbye = should_goodbye
 
     def __repr__(self):
-        return "<Chat {} should Welcome new users: {}>".format(
-            self.chat_id,
-            self.should_welcome,
+        return "<ᴄʜᴀᴛ {} sʜᴏᴜʟᴅ sʜᴏᴜʟᴅ ɴᴇᴡ ᴜsᴇʀs: {}>".format(
+            self.chat_id, self.should_welcome
         )
 
 
@@ -114,7 +135,23 @@ class CleanServiceSetting(BASE):
         self.chat_id = str(chat_id)
 
     def __repr__(self):
-        return "<Chat used clean service ({})>".format(self.chat_id)
+        return "<ᴄʜᴀᴛ ᴜsᴇᴅ ᴄʟᴇᴀɴ sᴇʀᴠɪᴄᴇ ({})>".format(self.chat_id)
+
+
+class RaidMode(BASE):
+    __tablename__ = "raid_mode"
+    chat_id = Column(String(14), primary_key=True)
+    status = Column(Boolean, default=False)
+    time = Column(Integer, default=21600)
+    acttime = Column(Integer, default=3600)
+    # permanent = Column(Boolean, default=False)
+
+    def __init__(self, chat_id, status, time, acttime):
+        self.chat_id = str(chat_id)
+        self.status = status
+        self.time = time
+        self.acttime = acttime
+        # self.permanent = permanent
 
 
 Welcome.__table__.create(checkfirst=True)
@@ -123,12 +160,14 @@ GoodbyeButtons.__table__.create(checkfirst=True)
 WelcomeMute.__table__.create(checkfirst=True)
 WelcomeMuteUsers.__table__.create(checkfirst=True)
 CleanServiceSetting.__table__.create(checkfirst=True)
+RaidMode.__table__.create(checkfirst=True)
 
 INSERTION_LOCK = threading.RLock()
 WELC_BTN_LOCK = threading.RLock()
 LEAVE_BTN_LOCK = threading.RLock()
 WM_LOCK = threading.RLock()
 CS_LOCK = threading.RLock()
+RAID_LOCK = threading.RLock()
 
 
 def welcome_mutes(chat_id):
@@ -260,11 +299,7 @@ def set_gdbye_preference(chat_id, should_goodbye):
 
 
 def set_custom_welcome(
-    chat_id,
-    custom_content,
-    custom_welcome,
-    welcome_type,
-    buttons=None,
+    chat_id, custom_content, custom_welcome, welcome_type, buttons=None
 ):
     if buttons is None:
         buttons = []
@@ -426,3 +461,47 @@ def migrate_chat(old_chat_id, new_chat_id):
                 btn.chat_id = str(new_chat_id)
 
         SESSION.commit()
+
+
+def getRaidStatus(chat_id):
+    try:
+        if stat := SESSION.query(RaidMode).get(str(chat_id)):
+            return stat.status, stat.time, stat.acttime
+        return False, 21600, 3600  # default
+    finally:
+        SESSION.close()
+
+
+def setRaidStatus(chat_id, status, time=21600, acttime=3600):
+    with RAID_LOCK:
+        if prevObj := SESSION.query(RaidMode).get(str(chat_id)):
+            SESSION.delete(prevObj)
+        newObj = RaidMode(str(chat_id), status, time, acttime)
+        SESSION.add(newObj)
+        SESSION.commit()
+
+
+def toggleRaidStatus(chat_id):
+    newObj = True
+    with RAID_LOCK:
+        prevObj = SESSION.query(RaidMode).get(str(chat_id))
+        if prevObj:
+            newObj = not prevObj.status
+        stat = RaidMode(
+            str(chat_id), newObj, prevObj.time or 21600, prevObj.acttime or 3600
+        )
+        SESSION.add(stat)
+        SESSION.commit()
+        return newObj
+
+
+def _ResetRaidOnRestart():
+    with RAID_LOCK:
+        raid = SESSION.query(RaidMode).all()
+        for r in raid:
+            r.status = False
+        SESSION.commit()
+
+
+# it uses a cron job to turn off so if the bot restarts and there is a pending raid disable job then raid will stay on
+_ResetRaidOnRestart()

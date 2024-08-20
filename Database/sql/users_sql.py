@@ -1,10 +1,33 @@
+"""
+MIT License
+
+Copyright (c) 2022 Aʙɪsʜɴᴏɪ
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+"""
+
 import threading
 
 from sqlalchemy import (
     BigInteger,
     Column,
     ForeignKey,
-    Integer,
     String,
     UnicodeText,
     UniqueConstraint,
@@ -25,7 +48,7 @@ class Users(BASE):
         self.username = username
 
     def __repr__(self):
-        return "<User {} ({})>".format(self.username, self.user_id)
+        return "<ᴜsᴇʀ {} ({})>".format(self.username, self.user_id)
 
 
 class Chats(BASE):
@@ -38,12 +61,12 @@ class Chats(BASE):
         self.chat_name = chat_name
 
     def __repr__(self):
-        return "<Chat {} ({})>".format(self.chat_name, self.chat_id)
+        return "<ᴄʜᴀᴛ {} ({})>".format(self.chat_name, self.chat_id)
 
 
 class ChatMembers(BASE):
     __tablename__ = "chat_members"
-    priv_chat_id = Column(Integer, primary_key=True)
+    priv_chat_id = Column(BigInteger, primary_key=True)
     # NOTE: Use dual primary key instead of private primary key?
     chat = Column(
         String(14),
@@ -62,7 +85,7 @@ class ChatMembers(BASE):
         self.user = user
 
     def __repr__(self):
-        return "<Chat user {} ({}) in chat {} ({})>".format(
+        return "<ᴄʜᴀᴛ ᴜsᴇʀ {} ({}) ɪɴ ᴄʜᴀᴛ {} ({})>".format(
             self.user.username,
             self.user.user_id,
             self.chat.chat_name,

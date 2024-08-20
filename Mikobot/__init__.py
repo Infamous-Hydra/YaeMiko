@@ -17,7 +17,7 @@ from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.constants import ParseMode
 from telegram.ext import Application, ApplicationBuilder
 from telethon import TelegramClient, events
-from telethon.sessions import MemorySession
+from telethon.sessions import MemorySession, StringSession
 
 # <=======================================================================================================>
 
@@ -120,12 +120,12 @@ else:
     ALLOW_EXCL = Config.ALLOW_EXCL
     DB_NAME = Config.DB_NAME
     DB_URI = Config.DATABASE_URL
+    BAN_STICKER = Config.BAN_STICKER
     MESSAGE_DUMP = Config.MESSAGE_DUMP
     SUPPORT_ID = Config.SUPPORT_ID
     DEL_CMDS = Config.DEL_CMDS
     EVENT_LOGS = Config.EVENT_LOGS
     INFOPIC = Config.INFOPIC
-    BAN_STICKER = Config.BAN_STICKER
     LOAD = Config.LOAD
     MONGO_DB_URI = Config.MONGO_DB_URI
     NO_LOAD = Config.NO_LOAD
@@ -230,7 +230,7 @@ loop.run_until_complete(
 # <=============================================== CLIENT SETUP ========================================================>
 # Create the Mikobot and TelegramClient instances
 app = Client("Mikobot", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
-tbot = TelegramClient(MemorySession(), API_ID, API_HASH)
+tbot = TelegramClient("Yaebot", API_ID, API_HASH)
 # <=======================================================================================================>
 
 # <=============================================== GETTING BOT INFO ========================================================>

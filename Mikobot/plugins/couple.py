@@ -9,6 +9,14 @@ from Mikobot import app
 
 # <=======================================================================================================>
 
+# List of additional images
+ADDITIONAL_IMAGES = [
+    "https://telegra.ph/file/7ef6006ed6e452a6fd871.jpg",
+    "https://telegra.ph/file/16ede7c046f35e699ed3c.jpg",
+    "https://telegra.ph/file/f16b555b2a66853cc594e.jpg",
+    "https://telegra.ph/file/7ef6006ed6e452a6fd871.jpg",
+]
+
 
 # <================================================ FUNCTION =======================================================>
 def dt():
@@ -32,33 +40,42 @@ def dt_tom():
 tomorrow = str(dt_tom())
 today = str(dt()[0])
 
-COUPLES_PIC = "https://telegra.ph/file/c6d0c884f559b9ed8a54e.jpg"
 C = """
-✧ 𝗖𝗢𝗨𝗣𝗟𝗘𝗦 𝗢𝗙 𝗧𝗛𝗘 𝗗𝗔𝗬 ✧
-➖➖➖➖➖➖➖➖➖➖➖➖
-{} + ( PGM🎀😶 (https://t.me/Chalnayaaaaaarr) + 花火 (https://t.me/zd_sr07) + ゼロツー (https://t.me/wewewe_x) ) = 💞
-➖➖➖➖➖➖➖➖➖➖➖➖
-𝗡𝗘𝗪 𝗖𝗢𝗨𝗣𝗟𝗘 𝗢𝗙 𝗧𝗛𝗘 𝗗𝗔𝗬 𝗖𝗔𝗡 𝗕𝗘 𝗖𝗛𝗢𝗦𝗘𝗡 𝗔𝗧 12AM {}
+•➵💞࿐ 𝐇𝐚𝐩𝐩𝐲 𝐜𝐨𝐮𝐩𝐥𝐞 𝐨𝐟 𝐭𝐡𝐞 𝐝𝐚𝐲
+╭──────────────
+┊•➢ {} + ( PGM🎀😶 (https://t.me/Chalnayaaaaaarr) + 花火 (https://t.me/zd_sr07) + ゼロツー (https://t.me/wewewe_x) ) = 💞
+╰───•➢♡
+╭──────────────
+┊•➢ 𝗡𝗲𝘄 𝗰𝗼𝘂𝗽𝗹𝗲 𝗼𝗳 𝘁𝗵𝗲 𝗱𝗮𝘆 𝗺𝗮𝘆𝗯𝗲
+┊ 𝗰𝗵𝗼𝘀𝗲𝗻 𝗮𝘁 12AM {}
+╰───•➢♡
 """
 CAP = """
-✧ 𝗖𝗢𝗨𝗣𝗟𝗘𝗦 𝗢𝗙 𝗧𝗛𝗘 𝗗𝗔𝗬 ✧
-➖➖➖➖➖➖➖➖➖➖➖➖
-{} + {} = 💞
-➖➖➖➖➖➖➖➖➖➖➖➖
-𝗡𝗘𝗪 𝗖𝗢𝗨𝗣𝗟𝗘 𝗢𝗙 𝗧𝗛𝗘 𝗗𝗔𝗬 𝗖𝗔𝗡 𝗕𝗘 𝗖𝗛𝗢𝗦𝗘𝗡 𝗔𝗧 12AM {}
+•➵💞࿐ 𝐇𝐚𝐩𝐩𝐲 𝐜𝐨𝐮𝐩𝐥𝐞 𝐨𝐟 𝐭𝐡𝐞 𝐝𝐚𝐲
+╭──────────────
+┊•➢ {} + {} = 💞
+╰───•➢♡
+╭──────────────
+┊•➢ 𝗡𝗲𝘄 𝗰𝗼𝘂𝗽𝗹𝗲 𝗼𝗳 𝘁𝗵𝗲 𝗱𝗮𝘆 𝗺𝗮𝘆𝗯𝗲
+┊ 𝗰𝗵𝗼𝘀𝗲𝗻 𝗮𝘁 12AM {}
+╰───•➢♡
 """
 
 CAP2 = """
-✧ 𝗖𝗢𝗨𝗣𝗟𝗘𝗦 𝗢𝗙 𝗧𝗛𝗘 𝗗𝗔𝗬 ✧
-➖➖➖➖➖➖➖➖➖➖➖➖
-{} (tg://openmessage?user_id={}) + {} (tg://openmessage?user_id={}) = 💞\n
-➖➖➖➖➖➖➖➖➖➖➖➖
-𝗡𝗘𝗪 𝗖𝗢𝗨𝗣𝗟𝗘 𝗢𝗙 𝗧𝗛𝗘 𝗗𝗔𝗬 𝗖𝗔𝗡 𝗕𝗘 𝗖𝗛𝗢𝗦𝗘𝗡 𝗔𝗧 12AM {}
+•➵💞࿐ 𝐇𝐚𝐩𝐩𝐲 𝐜𝐨𝐮𝐩𝐥𝐞 𝐨𝐟 𝐭𝐡𝐞 𝐝𝐚𝐲
+╭──────────────
+┊{} (tg://openmessage?user_id={}) + {} (tg://openmessage?user_id={}) = 💞\n
+╰───•➢♡
+╭──────────────
+┊•➢ 𝗡𝗲𝘄 𝗰𝗼𝘂𝗽𝗹𝗲 𝗼𝗳 𝘁𝗵𝗲 𝗱𝗮𝘆 𝗺𝗮𝘆𝗯𝗲
+┊ 𝗰𝗵𝗼𝘀𝗲𝗻 𝗮𝘁 12AM {}
+╰───•➢♡
 """
 
 
 @app.on_message(filters.command(["couple", "couples", "shipping"]) & ~filters.private)
 async def nibba_nibbi(_, message):
+    COUPLES_PIC = random.choice(ADDITIONAL_IMAGES)  # Move inside the command function
     if message.from_user.id == 5540249238:
         my_ = await _.get_users("rfxtuv")
         me = await _.get_users(5540249238)
@@ -75,7 +92,7 @@ async def nibba_nibbi(_, message):
                     if not i.user.is_bot:
                         list_of_users.append(i.user.id)
                 if len(list_of_users) < 2:
-                    return await message.reply_text("ɴᴏᴛ ᴇɴᴏᴜɢʜ ᴜsᴇʀs ɪɴ ᴛʜɪs ɢʀᴏᴜᴘ.")
+                    return await message.reply_text("Not enough users in the group.")
                 c1_id = random.choice(list_of_users)
                 c2_id = random.choice(list_of_users)
                 while c1_id == c2_id:
@@ -98,11 +115,14 @@ async def nibba_nibbi(_, message):
                 c1_name = (await _.get_users(c1_id)).first_name
                 c2_name = (await _.get_users(c2_id)).first_name
                 print(c1_id, c2_id, c1_name, c2_name)
-                couple_selection_message = f"""✧ 𝗖𝗢𝗨𝗣𝗟𝗘𝗦 𝗢𝗙 𝗧𝗛𝗘 𝗗𝗔𝗬 ✧
-➖➖➖➖➖➖➖➖➖➖➖➖
-[{c1_name}](tg://openmessage?user_id={c1_id}) + [{c2_name}](tg://openmessage?user_id={c2_id}) = 💞
-➖➖➖➖➖➖➖➖➖➖➖➖
-𝗡𝗘𝗪 𝗖𝗢𝗨𝗣𝗟𝗘 𝗢𝗙 𝗧𝗛𝗘 𝗗𝗔𝗬 𝗖𝗔𝗡 𝗕𝗘 𝗖𝗛𝗢𝗦𝗘𝗡 𝗔𝗧 12AM {tomorrow}"""
+                couple_selection_message = f"""•➵💞࿐ 𝐇𝐚𝐩𝐩𝐲 𝐜𝐨𝐮𝐩𝐥𝐞 𝐨𝐟 𝐭𝐡𝐞 𝐝𝐚𝐲
+╭──────────────
+┊•➢ [{c1_name}](tg://openmessage?user_id={c1_id}) + [{c2_name}](tg://openmessage?user_id={c2_id}) = 💞
+╰───•➢♡
+╭──────────────
+┊•➢ 𝗡𝗲𝘄 𝗰𝗼𝘂𝗽𝗹𝗲 𝗼𝗳 𝘁𝗵𝗲 𝗱𝗮𝘆 𝗺𝗮𝘆𝗯𝗲
+┊ 𝗰𝗵𝗼𝘀𝗲𝗻 𝗮𝘁 12AM {tomorrow}
+╰───•➢♡"""
                 await _.send_photo(
                     message.chat.id, photo=COUPLES_PIC, caption=couple_selection_message
                 )
@@ -112,12 +132,10 @@ async def nibba_nibbi(_, message):
 
 
 # <=================================================== HELP ====================================================>
-
-
 __help__ = """
 💘 *Choose couples in your chat*
 
-» /couple, /couples, /shipping *:* Choose 2 users and send their names as couples in your chat.
+➦ /couple, /couples, /shipping *:* Choose 2 users and send their names as couples in your chat.
 """
 
 __mod_name__ = "COUPLE"

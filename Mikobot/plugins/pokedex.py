@@ -5,7 +5,7 @@
 
 # <============================================== IMPORTS =========================================================>
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
-from telegram.ext import ContextTypes, CallbackQueryHandler, CommandHandler
+from telegram.ext import CallbackQueryHandler, CommandHandler, ContextTypes
 
 from Mikobot import function
 from Mikobot.state import state

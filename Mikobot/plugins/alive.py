@@ -34,12 +34,12 @@ async def alive(_, message: Message):
     caption = f"""**HEY, I AM {BOT_NAME}**
 
 ━━━━━━ 🌟✿🌟 ━━━━━━
-✪ **CREATOR:** [🄺🄰🅁🄼🄰](https://t.me/anime_Freakz)
+✪ **CREATOR:** [🄺🄰🅁🄼🄰](https://t.me/O_oKarma)
 
 {library_versions_text}
 
 ➲ **PYTHON:** `{version_info[0]}.{version_info[1]}.{version_info[2]}`
-➲ **BOT VERSION:** `2.0`
+➲ **BOT VERSION:** `2.1 Rx`
 ━━━━━━ 🌟✿🌟 ━━━━━━"""
 
     await message.reply_animation(

@@ -15,49 +15,55 @@ UPTIME = time()  # Check bot uptime
 
 
 # <================================================ FUNCTION =======================================================>
-async def getid(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    chat = update.effective_chat
-    your_id = update.message.from_user.id
-    message_id = update.message.message_id
-    reply = update.message.reply_to_message
+@app.on_message(filters.command("id"))
+async def _id(client, message):
+    chat = message.chat
+    your_id = message.from_user.id
+    mention_user = message.from_user.mention
+    message_id = message.id
+    reply = message.reply_to_message
 
-    text = f"[Message ID:](https://t.me/{chat.username}/{message_id}) `{message_id}`\n"
-    text += f"[Your ID:](tg://user?id={your_id}) `{your_id}`\n"
+    text = f"**๏ [ᴍᴇssᴀɢᴇ ɪᴅ]({message.link})** » `{message_id}`\n"
+    text += f"**๏ [{mention_user}](tg://user?id={your_id})** » `{your_id}`\n"
 
-    if context.args:
+    if not message.command:
+        message.command = message.text.split()
+
+    if not message.command:
+        message.command = message.text.split()
+
+    if len(message.command) == 2:
         try:
-            user_id = context.args[0]
-            text += f"[User ID:](tg://user?id={user_id}) `{user_id}`\n"
+            split = message.text.split(None, 1)[1].strip()
+            user_id = (await client.get_users(split)).id
+            user_mention = (await client.get_users(split)).mention
+            text += f"**๏ [{user_mention}](tg://user?id={user_id})** » `{user_id}`\n"
+
         except Exception:
-            await update.message.reply_text(
-                "This user doesn't exist.", parse_mode="Markdown"
-            )
-            return
+            return await message.reply_text("**🪄 ᴛʜɪs ᴜsᴇʀ ᴅᴏᴇsɴ'ᴛ ᴇxɪsᴛ.**")
 
-    text += f"[Chat ID:](https://t.me/{chat.username}) `{chat.id}`\n\n"
+    text += f"**๏ [ᴄʜᴀᴛ ɪᴅ ](https://t.me/{chat.username})** » `{chat.id}`\n\n"
 
-    if reply:
-        text += f"[Replied Message ID:](https://t.me/{chat.username}/{reply.message_id}) `{reply.message_id}`\n"
-        text += f"[Replied User ID:](tg://user?id={reply.from_user.id}) `{reply.from_user.id}`\n\n"
+    if (
+        not getattr(reply, "empty", True)
+        and not message.forward_from_chat
+        and not reply.sender_chat
+    ):
+        text += f"**๏ [ʀᴇᴘʟɪᴇᴅ ᴍᴇssᴀɢᴇ ɪᴅ]({reply.link})** » `{message.reply_to_message.id}`\n"
+        text += f"**๏ [ʀᴇᴘʟɪᴇᴅ ᴜsᴇʀ ɪᴅ](tg://user?id={reply.from_user.id})** » `{reply.from_user.id}`\n\n"
 
     if reply and reply.forward_from_chat:
-        text += f"The forwarded channel, {reply.forward_from_chat.title}, has an id of `{reply.forward_from_chat.id}`\n\n"
+        text += f"๏ ᴛʜᴇ ғᴏʀᴡᴀʀᴅᴇᴅ ᴄʜᴀɴɴᴇʟ, {reply.forward_from_chat.title}, ʜᴀs ᴀɴ ɪᴅ ᴏғ `{reply.forward_from_chat.id}`\n\n"
 
     if reply and reply.sender_chat:
-        text += f"ID of the replied chat/channel, is `{reply.sender_chat.id}`"
+        text += f"๏ ID ᴏғ ᴛʜᴇ ʀᴇᴘʟɪᴇᴅ ᴄʜᴀᴛ/ᴄʜᴀɴɴᴇʟ, ɪs `{reply.sender_chat.id}`"
 
-    # Sticker ID to be sent
+    # Send sticker and text as a reply
     sticker_id = (
-        "CAACAgIAAx0CanzPTAABASPCZQdU9NbQIol5TW1GU2zV4KfjDMEAAnccAALIWZhJPyYLf3FzPHswBA"
+        "CAACAgIAAx0EdppwYAABAgotZg5rBL4P05Xjmy80p7DdNdneDmUAAnccAALIWZhJPyYLf3FzPHs0BA"
     )
-
-    # Send the sticker
-    await update.message.reply_sticker(sticker=sticker_id)
-
-    # Send the text message as a caption
-    await update.message.reply_text(
-        text, parse_mode="Markdown", disable_web_page_preview=True
-    )
+    await message.reply_sticker(sticker=sticker_id)
+    await message.reply_text(text, disable_web_page_preview=True)
 
 
 # Function to handle the "logs" command
@@ -100,7 +106,7 @@ async def ping(_, m: Message):
     delta_ping = time() - start
 
     up = strftime("%Hh %Mm %Ss", gmtime(time() - UPTIME))
-    image_url = "https://telegra.ph/file/f215a1c4adf25a5bad81b.jpg"
+    image_url = "https://telegra.ph/file/e1049f371bbec3f006f3a.jpg"
 
     # Send the image as a reply
     await replymsg.reply_photo(
@@ -115,7 +121,6 @@ async def ping(_, m: Message):
 
 # <================================================ HANDLER =======================================================>
 function(CommandHandler("logs", logs, block=False))
-function(CommandHandler("id", getid, block=False))
 function(CallbackQueryHandler(close_callback, pattern="^close$", block=False))
 
 # <================================================= HELP ======================================================>

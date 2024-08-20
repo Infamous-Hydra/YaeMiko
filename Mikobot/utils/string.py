@@ -141,12 +141,14 @@ async def escape_mentions_using_curly_brackets(
                 else m.from_user.mention
             ),
             fullname=" ".join(
-                [
-                    escape(m.from_user.first_name),
-                    escape(m.from_user.last_name),
-                ]
-                if m.from_user.last_name
-                else [escape(m.from_user.first_name)],
+                (
+                    [
+                        escape(m.from_user.first_name),
+                        escape(m.from_user.last_name),
+                    ]
+                    if m.from_user.last_name
+                    else [escape(m.from_user.first_name)]
+                ),
             ),
             chatname=chat_name,
             id=m.from_user.id,

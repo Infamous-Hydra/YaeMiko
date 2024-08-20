@@ -1,4 +1,3 @@
-# <============================================== IMPORTS =========================================================>
 import html
 
 from telegram import (
@@ -13,7 +12,6 @@ from telegram.ext import CallbackQueryHandler, CommandHandler, ContextTypes, fil
 from telegram.helpers import mention_html
 
 from Mikobot import DEV_USERS, DRAGONS, LOGGER, OWNER_ID, function
-from Mikobot.utils.can_restrict import BAN_STICKER
 from Mikobot.plugins.disable import DisableAbleCommandHandler
 from Mikobot.plugins.helper_funcs.chat_status import (
     can_delete,
@@ -28,10 +26,9 @@ from Mikobot.plugins.helper_funcs.misc import mention_username
 from Mikobot.plugins.helper_funcs.string_handling import extract_time
 from Mikobot.plugins.log_channel import gloggable, loggable
 
-# <=======================================================================================================>
+BAN_STICKER = "CAACAgUAAxkBAAEGWC5lloYv1tiI3-KPguoH5YX-RveWugACoQ4AAi4b2FQGdUhawbi91DQE"
 
 
-# <================================================ FUNCTION =======================================================>
 @connection_status
 @loggable
 @check_admin(permission="can_restrict_members", is_both=True)
@@ -693,9 +690,6 @@ async def bans_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return log
 
 
-# <================================================ HELP =======================================================>
-
-
 __help__ = """
 » /kickme: kicks the user who issued the command
 
@@ -714,7 +708,6 @@ __help__ = """
     Banning or UnBanning channels only work if you reply to their message, so don't use their username to ban/unban.
 """
 
-# <================================================ HANDLER =======================================================>
 BAN_HANDLER = CommandHandler(["ban", "sban"], ban, block=False)
 TEMPBAN_HANDLER = CommandHandler(["tban"], temp_ban, block=False)
 KICK_HANDLER = CommandHandler("kick", kick, block=False)
@@ -745,4 +738,3 @@ __handlers__ = [
     KICKME_HANDLER,
     BAN_CALLBACK_HANDLER,
 ]
-# <================================================ END =======================================================>

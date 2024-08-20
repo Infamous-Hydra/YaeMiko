@@ -4,7 +4,12 @@ import re
 from html import escape
 from random import choice
 
-from telegram import ChatMemberAdministrator, Update
+from telegram import (
+    ChatMemberAdministrator,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    Update,
+)
 from telegram.constants import ChatID, ChatType, ParseMode
 from telegram.error import BadRequest
 from telegram.ext import CommandHandler, ContextTypes
@@ -14,7 +19,7 @@ from Database.sql.approve_sql import is_approved
 from Infamous.karma import START_IMG
 from Mikobot import DEV_USERS, DRAGONS, INFOPIC, OWNER_ID, function
 from Mikobot.__main__ import STATS, USER_INFO
-from Mikobot.plugins.helper_funcs.chat_status import support_plus, dev_plus
+from Mikobot.plugins.helper_funcs.chat_status import support_plus
 from Mikobot.plugins.users import get_user_id
 
 # <=======================================================================================================>
@@ -187,15 +192,28 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await reply_with_text(escape(head))
 
 
-@dev_plus
+@support_plus
 async def stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    stats = "📊 <b>Miko-Bot's Statistics:</b>\n\n" + "\n".join(
+    stats = "📊 <b>Yae Miko Bot's Statistics:</b>\n\n" + "\n".join(
         [mod.__stats__() for mod in STATS]
     )
     result = re.sub(r"(\d+)", r"<code>\1</code>", stats)
 
+    keyboard = [
+        [
+            InlineKeyboardButton(
+                "㊋ Infamous • Hydra", url="https://t.me/Infamous_Hydra"
+            ),
+        ]
+    ]
+
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
     await update.effective_message.reply_photo(
-        photo=str(choice(START_IMG)), caption=result, parse_mode=ParseMode.HTML
+        photo=str(choice(START_IMG)),
+        caption=result,
+        parse_mode=ParseMode.HTML,
+        reply_markup=reply_markup,
     )
 
 
@@ -205,7 +223,9 @@ async def stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
 __help__ = """
 *Overall information about user:*
 
-» /info : Fetch information.
+» /info : Fetch user information.
+
+» /uinfo : Fetch user information in banner.
 """
 
 # <================================================ HANDLER =======================================================>

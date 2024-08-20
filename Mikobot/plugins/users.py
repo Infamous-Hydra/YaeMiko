@@ -199,8 +199,8 @@ async def log_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
             chat.title,
         )
 
-    if msg.forward_from:
-        sql.update_user(msg.forward_from.id, msg.forward_from.username)
+    if msg.from_user:
+        sql.update_user(msg.from_user.id, msg.from_user.username)
 
 
 async def chats(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -260,9 +260,9 @@ def __migrate__(old_chat_id, new_chat_id):
 
 
 # <================================================ HANDLER =======================================================>
-BROADCAST_HANDLER = CommandHandler(
-    ["broadcastall", "broadcastusers", "broadcastgroups"], broadcast, block=False
-)
+# BROADCAST_HANDLER = CommandHandler(
+# ["broadcastall", "broadcastusers", "broadcastgroups"], broadcast, block=False
+# )
 USER_HANDLER = MessageHandler(
     filters.ALL & filters.ChatType.GROUPS, log_user, block=False
 )
@@ -272,10 +272,10 @@ CHAT_CHECKER_HANDLER = MessageHandler(
 CHATLIST_HANDLER = CommandHandler("groups", chats, block=False)
 
 function(USER_HANDLER, USERS_GROUP)
-function(BROADCAST_HANDLER)
+# function(BROADCAST_HANDLER)
 function(CHATLIST_HANDLER)
 function(CHAT_CHECKER_HANDLER, CHAT_GROUP)
 
 __mod_name__ = "USERS"
-__handlers__ = [(USER_HANDLER, USERS_GROUP), BROADCAST_HANDLER, CHATLIST_HANDLER]
+__handlers__ = [(USER_HANDLER, USERS_GROUP), CHATLIST_HANDLER]
 # <================================================ END =======================================================>

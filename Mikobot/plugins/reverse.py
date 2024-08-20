@@ -1,117 +1,117 @@
-# CREATED BY: @Qewertyy
-
-# <============================================== IMPORTS =========================================================>
 import os
-import traceback
+import uuid
+from html import escape
 
-from pyrogram import Client, filters
-from pyrogram import types as t
+import requests
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram.constants import ParseMode
+from telegram.ext import CallbackContext, CommandHandler
 
-from Mikobot import app
-from Mikobot.state import state
+from Mikobot import dispatcher
 
-from .telegraph import telegraph, upload_file
-
-
-# <================================================ FUNCTIONS =====================================================>
-@app.on_message(filters.command(["p", "pp", "reverse", "sauce"]))
-async def reverseImageSearch(_: Client, m: t.Message):
-    try:
-        reply = await m.reply_text("`Downloading...`")
-        file = None
-        if not m.reply_to_message:
-            return await reply.edit("Reply to an image?")
-        if m.reply_to_message.document is False or m.reply_to_message.photo is False:
-            return await reply.edit("Reply to an image?")
-        if (
-            m.reply_to_message.document
-            and m.reply_to_message.document.mime_type
-            in ["image/png", "image/jpg", "image/jpeg"]
-            or m.reply_to_message.photo
-        ):
-            if (
-                m.reply_to_message.document
-                and m.reply_to_message.document.file_size > 5242880
-            ):
-                return await reply.edit("Reply to an image?")
-            file = await m.reply_to_message.download()
-        else:
-            return await reply.edit("Reply to an image?")
-        await reply.edit("`Uploading to the server...`")
-        imgUrl = upload_file(file)
-        os.remove(file)
-        if imgUrl is None:
-            return await reply.edit("Ran into an error.")
-        output = await reverse_image_search("google", f"https://graph.org/{imgUrl[0]}")
-        if output is None:
-            return await reply.edit("Ran into an error.")
-
-        names = output["content"]["bestResults"]["names"]
-        urls = output["content"]["bestResults"]["urls"]
-        btn = t.InlineKeyboardMarkup(
-            [[t.InlineKeyboardButton(text="IMAGE URL", url=urls[-1])]]
-        )
-
-        if len(names) > 10:
-            message = "\n".join(
-                [f"{index+1}. {name}" for index, name in enumerate(names[:10])]
-            )
-            htmlMessage = f"<br/>".join(
-                [f"{index+1}. {name}" for index, name in enumerate(names)]
-            )
-            htmlMessage += "<br/><br/><h3>URLS</h3><br/>"
-            htmlMessage += f"<br/>".join([f"{url}" for url in urls])
-            htmlMessage += (
-                "<br/><br/>By <a href='https://lexica.qewertyy.me'>LexicaAPI</a>"
-            )
-            telegraph_page = telegraph.create_page(
-                "More Results", html_content=htmlMessage
-            )
-            message += f"\n\n[More Results](https://telegra.ph/{telegraph_page['path']})\n\nBy @LexicaAPI"
-            await reply.delete()
-            return await m.reply_text(message, reply_markup=btn)
-
-        message = "\n".join([f"{index+1}. {name}" for index, name in enumerate(names)])
-        await reply.delete()
-        await m.reply_text(f"{message}\n\nBy @LexicaAPI", reply_markup=btn)
-    except Exception as E:
-        traceback.print_exc()
-        return await m.reply_text("Ran into an error.")
+ENDPOINT = "https://sasta-api.vercel.app/googleImageSearch"
 
 
-async def reverse_image_search(search_engine, img_url) -> dict:
-    try:
-        response = await state.post(
-            f"https://lexica.qewertyy.me/image-reverse/{search_engine}?img_url={img_url}",
-        )
-        if response.status_code != 200:
-            return None
-        output = response.json()
-        if output["code"] != 2:
-            return None
-        return output
-    except Exception as E:
-        raise Exception(f"API Error: {E}")
+# Define strings
+class STRINGS:
+    REPLY_TO_MEDIA = "ℹ️ Please reply to a message that contains one of the supported media types, such as a photo, sticker, or image file."
+    UNSUPPORTED_MEDIA_TYPE = "⚠️ <b>Unsupported media type!</b>\nℹ️ Please reply with a supported media type: image, sticker, or image file."
+
+    REQUESTING_API_SERVER = "🫧"
+
+    DOWNLOADING_MEDIA = "🔍"
+    UPLOADING_TO_API_SERVER = "📤"
+    PARSING_RESULT = "📥"
+
+    EXCEPTION_OCCURRED = "❌Exception occurred!\n\n<b>Exception: {}"
+
+    RESULT = """
+Query: {query}
+Google Page: <a href="{search_url}">Link</a>
+    """
+    OPEN_SEARCH_PAGE = "OPEN LINK"
 
 
-# <=================================================== HELP ====================================================>
+# Define command handlers
+async def reverse_image_search(update: Update, context: CallbackContext):
+    message = update.message
+    if len(message.text.split()) > 1:
+        image_url = message.text.split()[1]
+        params = {"image_url": image_url}
+        status_msg = await message.reply_text(STRINGS.REQUESTING_API_SERVER)
+        response = await requests.get(ENDPOINT, params=params)
+
+    elif message.reply_to_message:
+        reply = message.reply_to_message
+        if reply.photo or reply.sticker or reply.document:
+            status_msg = await message.reply_text(STRINGS.DOWNLOADING_MEDIA)
+            file_path = f"temp/{uuid.uuid4()}"
+            try:
+                file_id = (
+                    reply.photo[-1].file_id
+                    if reply.photo
+                    else (
+                        reply.sticker.file_id
+                        if reply.sticker
+                        else reply.document.file_id
+                    )
+                )
+                file = await context.bot.get_file(file_id)
+                os.makedirs(
+                    os.path.dirname(file_path), exist_ok=True
+                )  # Ensure directory exists
+                await file.download_to_drive(
+                    file_path
+                )  # Use download instead of download_to_drive
+            except Exception as exc:
+                text = STRINGS.EXCEPTION_OCCURRED.format(exc)
+                await message.reply_text(text)
+                return
+
+            with open(file_path, "rb") as image_file:
+                files = {"file": image_file}
+                await status_msg.edit_text(STRINGS.UPLOADING_TO_API_SERVER)
+                response = requests.post(ENDPOINT, files=files)
+
+            os.remove(file_path)  # Remove the file after it's been used
+
+    if response.status_code == 404:
+        text = STRINGS.EXCEPTION_OCCURRED.format(response.json()["error"])
+        await message.reply_text(text)
+        await status_msg.delete()
+        return
+    elif response.status_code != 200:
+        text = STRINGS.EXCEPTION_OCCURRED.format(response.text)
+        await message.reply_text(text)
+        await status_msg.delete()
+        return
+
+    await status_msg.edit_text(STRINGS.PARSING_RESULT)
+    response_json = response.json()
+    query = response_json["query"]
+    search_url = response_json["search_url"]
+
+    # Escape HTML tags in query to prevent them from being interpreted as markup
+    escaped_query = escape(query)
+
+    text = STRINGS.RESULT.format(
+        query=(
+            f"<code>{escaped_query}</code>"
+            if escaped_query
+            else "<i>Name not found</i>"
+        ),
+        search_url=search_url,
+    )
+    buttons = [[InlineKeyboardButton(STRINGS.OPEN_SEARCH_PAGE, url=search_url)]]
+    await message.reply_text(
+        text,
+        disable_web_page_preview=True,
+        reply_markup=InlineKeyboardMarkup(buttons),
+        parse_mode=ParseMode.HTML,  # Specify parse_mode as 'HTML' to interpret HTML tags
+    )
+    await status_msg.delete()
 
 
-__help__ = """
-🖼 *IMAGE REVERSE*
-
-» `/p`, `/pp`, `/reverse`, `/sauce`: Reverse image search using various search engines.
-
-➠ *Usage:*
-Reply to an image with one of the above commands to perform a reverse image search.
-
-➠ *Example:*
-» `/p` - Perform a reverse image search.
-
-➠ *Note:*
-- Supported image formats: PNG, JPG, JPEG.
-- Maximum file size: 5 MB.
-"""
-
-__mod_name__ = "REVERSE"
-# <================================================ END =======================================================>
+dispatcher.add_handler(
+    CommandHandler(["reverse", "pp", "p", "grs", "sauce"], reverse_image_search)
+)

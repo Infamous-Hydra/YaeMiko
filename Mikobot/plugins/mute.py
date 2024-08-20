@@ -1,4 +1,3 @@
-# <============================================== IMPORTS =========================================================>
 import html
 from typing import Union
 
@@ -18,10 +17,7 @@ from Mikobot.plugins.helper_funcs.extraction import extract_user, extract_user_a
 from Mikobot.plugins.helper_funcs.string_handling import extract_time
 from Mikobot.plugins.log_channel import loggable
 
-# <=======================================================================================================>
 
-
-# <================================================ FUNCTION =======================================================>
 async def check_user(user_id: int, bot: Bot, chat: Chat) -> Union[str, None]:
     if not user_id:
         reply = "You don't seem to be referring to a user or the ID specified is incorrect.."
@@ -234,9 +230,6 @@ async def temp_mute(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
     return ""
 
 
-# <=================================================== HELP ====================================================>
-
-
 __help__ = """
 ➠ *Admins only:*
 
@@ -247,7 +240,6 @@ __help__ = """
 » /unmute <userhandle>: unmutes a user. Can also be used as a reply, muting the replied to user.
 """
 
-# <================================================ HANDLER =======================================================>
 MUTE_HANDLER = CommandHandler("mute", mute, block=False)
 UNMUTE_HANDLER = CommandHandler("unmute", unmute, block=False)
 TEMPMUTE_HANDLER = CommandHandler(["tmute", "tempmute"], temp_mute, block=False)
@@ -258,4 +250,3 @@ function(TEMPMUTE_HANDLER)
 
 __mod_name__ = "MUTE"
 __handlers__ = [MUTE_HANDLER, UNMUTE_HANDLER, TEMPMUTE_HANDLER]
-# <================================================ END =======================================================>

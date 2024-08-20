@@ -2253,11 +2253,11 @@ async def get_top_animes(gnr: str, page, user):
 async def get_user_favourites(id_, user, req, page, sighs, duser=None):
     vars_ = {"id": int(id_), "page": int(page)}
     result = await return_json_senpai(
-        FAV_ANI_QUERY
-        if req == "ANIME"
-        else FAV_CHAR_QUERY
-        if req == "CHAR"
-        else FAV_MANGA_QUERY,
+        (
+            FAV_ANI_QUERY
+            if req == "ANIME"
+            else FAV_CHAR_QUERY if req == "CHAR" else FAV_MANGA_QUERY
+        ),
         vars_,
         auth=True,
         user=int(user),
@@ -2268,9 +2268,7 @@ async def get_user_favourites(id_, user, req, page, sighs, duser=None):
     msg = (
         "Favourite Animes:\n\n"
         if req == "ANIME"
-        else "Favourite Characters:\n\n"
-        if req == "CHAR"
-        else "Favourite Manga:\n\n"
+        else "Favourite Characters:\n\n" if req == "CHAR" else "Favourite Manga:\n\n"
     )
     for i in data["edges"]:
         node_name = (
@@ -2373,9 +2371,7 @@ async def get_additional_info(
             (
                 DES_INFO_QUERY
                 if req == "desc"
-                else CHA_INFO_QUERY
-                if req == "char"
-                else REL_INFO_QUERY
+                else CHA_INFO_QUERY if req == "char" else REL_INFO_QUERY
             )
             if ctgry == "ANI"
             else DESC_INFO_QUERY
@@ -2817,11 +2813,11 @@ async def toggle_favourites(id_: int, media: str, user: int):
     query = (
         ANIME_MUTATION
         if media == "ANIME" or media == "AIRING"
-        else CHAR_MUTATION
-        if media == "CHARACTER"
-        else MANGA_MUTATION
-        if media == "MANGA"
-        else STUDIO_MUTATION
+        else (
+            CHAR_MUTATION
+            if media == "CHARACTER"
+            else MANGA_MUTATION if media == "MANGA" else STUDIO_MUTATION
+        )
     )
     k = await return_json_senpai(query=query, vars_=vars_, auth=True, user=int(user))
     try:
@@ -2890,9 +2886,7 @@ async def update_anilist(id_, req, user, eid: int = None, status: str = None):
         query=(
             ANILIST_MUTATION
             if req == "lsas"
-            else ANILIST_MUTATION_UP
-            if req == "lsus"
-            else ANILIST_MUTATION_DEL
+            else ANILIST_MUTATION_UP if req == "lsus" else ANILIST_MUTATION_DEL
         ),
         vars_=vars_,
         auth=True,
@@ -2902,9 +2896,11 @@ async def update_anilist(id_, req, user, eid: int = None, status: str = None):
         (
             k["data"]["SaveMediaListEntry"]
             if req == "lsas"
-            else k["data"]["UpdateMediaListEntries"]
-            if req == "lsus"
-            else k["data"]["DeleteMediaListEntry"]
+            else (
+                k["data"]["UpdateMediaListEntries"]
+                if req == "lsus"
+                else k["data"]["DeleteMediaListEntry"]
+            )
         )
         return "ok"
     except KeyError:
@@ -4007,32 +4003,52 @@ async def toggle_favourites_btn(client: Client, cq: CallbackQuery, cdata: dict):
         )
         if query[1] == "ANIME" and len(query) == 3
         else (
-            await get_anilist(
-                query[3],
-                page=int(query[4]),
-                auth=True,
-                user=auser,
-                cid=gid if gid != user else None,
+            (
+                await get_anilist(
+                    query[3],
+                    page=int(query[4]),
+                    auth=True,
+                    user=auser,
+                    cid=gid if gid != user else None,
+                )
             )
-        )
-        if query[1] == "ANIME" and len(query) != 3
-        else (
-            await get_manga(
-                query[3],
-                page=int(query[4]),
-                auth=True,
-                user=auser,
-                cid=gid if gid != user else None,
-            )
-        )
-        if query[1] == "MANGA"
-        else (await get_airing(query[3], auth=True, user=auser, ind=int(query[4])))
-        if query[1] == "AIRING"
-        else (await get_character(query[3], int(query[4]), auth=True, user=auser))
-        if query[1] == "CHARACTER"
-        else (
-            await get_studios(
-                query[3], int(query[4]), user=auser, auth=True, duser=user
+            if query[1] == "ANIME" and len(query) != 3
+            else (
+                (
+                    await get_manga(
+                        query[3],
+                        page=int(query[4]),
+                        auth=True,
+                        user=auser,
+                        cid=gid if gid != user else None,
+                    )
+                )
+                if query[1] == "MANGA"
+                else (
+                    (
+                        await get_airing(
+                            query[3], auth=True, user=auser, ind=int(query[4])
+                        )
+                    )
+                    if query[1] == "AIRING"
+                    else (
+                        (
+                            await get_character(
+                                query[3], int(query[4]), auth=True, user=auser
+                            )
+                        )
+                        if query[1] == "CHARACTER"
+                        else (
+                            await get_studios(
+                                query[3],
+                                int(query[4]),
+                                user=auser,
+                                auth=True,
+                                duser=user,
+                            )
+                        )
+                    )
+                )
             )
         )
     )
@@ -4041,9 +4057,7 @@ async def toggle_favourites_btn(client: Client, cq: CallbackQuery, cdata: dict):
     pic, msg = (
         (result[0], result[1])
         if query[1] == "ANIME" and len(query) == 3
-        else (result[0])
-        if query[1] == "AIRING"
-        else (result[0], result[1][0])
+        else (result[0]) if query[1] == "AIRING" else (result[0], result[1][0])
     )
     btns = get_btns(
         query[1],
@@ -4075,9 +4089,11 @@ async def list_update_anilist_btn(client: Client, cq: CallbackQuery, cdata: dict
         row.append(
             InlineKeyboardButton(
                 text=i,
-                callback_data=cq.data.replace("lsadd", f"lsas_{i}")
-                if query[0] == "lsadd"
-                else cq.data.replace("lsupdt", f"lsus_{i}"),
+                callback_data=(
+                    cq.data.replace("lsadd", f"lsas_{i}")
+                    if query[0] == "lsadd"
+                    else cq.data.replace("lsupdt", f"lsus_{i}")
+                ),
             )
         )
         if len(row) == 3:
@@ -4179,60 +4195,66 @@ async def update_anilist_btn(client: Client, cq: CallbackQuery, cdata: dict):
         )
         if query[2] == "ANIME" and (len(query) == 4 or len(query) == 5)
         else (
-            await get_anilist(
-                query[4],
-                page=int(query[5]),
-                auth=True,
-                user=auser,
-                cid=gid if gid != user else None,
+            (
+                await get_anilist(
+                    query[4],
+                    page=int(query[5]),
+                    auth=True,
+                    user=auser,
+                    cid=gid if gid != user else None,
+                )
             )
-        )
-        if query[2] == "ANIME" and len(query) == 6
-        else (
-            await get_anilist(
-                query[5],
-                page=int(query[6]),
-                auth=True,
-                user=auser,
-                cid=gid if gid != user else None,
-            )
-        )
-        if query[2] == "ANIME" and len(query) == 7
-        else (
-            await get_manga(
-                query[4],
-                page=int(query[5]),
-                auth=True,
-                user=auser,
-                cid=gid if gid != user else None,
-            )
-        )
-        if query[2] == "MANGA" and len(query) == 6
-        else (
-            await get_manga(
-                query[5],
-                page=int(query[6]),
-                auth=True,
-                user=auser,
-                cid=gid if gid != user else None,
-            )
-        )
-        if query[2] == "MANGA" and len(query) == 7
-        else (
-            await get_airing(
-                query[4] if eid is None else query[5],
-                auth=True,
-                user=auser,
-                ind=int(query[5] if eid is None else query[6]),
+            if query[2] == "ANIME" and len(query) == 6
+            else (
+                (
+                    await get_anilist(
+                        query[5],
+                        page=int(query[6]),
+                        auth=True,
+                        user=auser,
+                        cid=gid if gid != user else None,
+                    )
+                )
+                if query[2] == "ANIME" and len(query) == 7
+                else (
+                    (
+                        await get_manga(
+                            query[4],
+                            page=int(query[5]),
+                            auth=True,
+                            user=auser,
+                            cid=gid if gid != user else None,
+                        )
+                    )
+                    if query[2] == "MANGA" and len(query) == 6
+                    else (
+                        (
+                            await get_manga(
+                                query[5],
+                                page=int(query[6]),
+                                auth=True,
+                                user=auser,
+                                cid=gid if gid != user else None,
+                            )
+                        )
+                        if query[2] == "MANGA" and len(query) == 7
+                        else (
+                            await get_airing(
+                                query[4] if eid is None else query[5],
+                                auth=True,
+                                user=auser,
+                                ind=int(query[5] if eid is None else query[6]),
+                            )
+                        )
+                    )
+                )
             )
         )
     )
     pic, msg = (
         (result[0], result[1])
         if query[2] == "ANIME" and (len(query) == 4 or len(query) == 5)
-        else (result[0])
-        if query[2] == "AIRING"
-        else (result[0], result[1][0])
+        else (result[0]) if query[2] == "AIRING" else (result[0], result[1][0])
     )
     btns = get_btns(
         query[2],
@@ -4240,11 +4262,11 @@ async def update_anilist_btn(client: Client, cq: CallbackQuery, cdata: dict):
         user=user,
         auth=True,
         lsqry=query[4] if len(query) == 6 else query[5] if len(query) == 7 else None,
-        lspage=int(query[5])
-        if len(query) == 6
-        else int(query[6])
-        if len(query) == 7
-        else None,
+        lspage=(
+            int(query[5])
+            if len(query) == 6
+            else int(query[6]) if len(query) == 7 else None
+        ),
     )
     try:
         await cq.edit_message_media(
@@ -4265,9 +4287,7 @@ async def additional_info_btn(client: Client, cq: CallbackQuery, cdata: dict):
     info = (
         "<b>Description</b>"
         if kek == "desc"
-        else "<b>Series List</b>"
-        if kek == "ls"
-        else "<b>Characters List</b>"
+        else "<b>Series List</b>" if kek == "ls" else "<b>Characters List</b>"
     )
     page = 0
     lsqry = f"_{q[3]}" if len(q) > 6 else ""
@@ -4329,9 +4349,11 @@ async def additional_info_btn(client: Client, cq: CallbackQuery, cdata: dict):
     cbd = (
         f"btn_{qry}_{q[3]}_{user}"
         if len(q) <= 5
-        else f"page_ANIME{lsqry}{lspg}_{q[5]}_{user}"
-        if ctgry == "ANI"
-        else f"page_CHARACTER{lsqry}{lspg}_{q[5]}_{user}"
+        else (
+            f"page_ANIME{lsqry}{lspg}_{q[5]}_{user}"
+            if ctgry == "ANI"
+            else f"page_CHARACTER{lsqry}{lspg}_{q[5]}_{user}"
+        )
     )
     button.append([InlineKeyboardButton(text="BACK", callback_data=cbd)])
     try:
@@ -5112,7 +5134,7 @@ QUOTES_IMG = [
 __help__ = """
 ⛩ *Anime:*
 
-➠ *Mikobot provides you the best anime-based commands including anime news and much more!*
+➠ *Dazai provides you the best anime-based commands including anime news and much more!*
 
 ➠ *Commands:*
 

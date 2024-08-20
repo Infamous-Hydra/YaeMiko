@@ -1,0 +1,13 @@
+{
+    "no_uname": "<code>No Username</code>",
+    "no_last_name": "<code>No Last Name</code>",
+    "uname_change_msg": "✨ Changed username from {bef} ➡️ {aft}.\n",
+    "lastname_change_msg": "✨ Changed last name from {bef} ➡️ {aft}.\n",
+    "firstname_change_msg": "✨ Changed first name from {bef} ➡️ {aft}.\n",
+    "set_sangmata_help": "Use <code>/{cmd} on</code>, to enable Mikomata. If you want disable, you can use off parameter.",
+    "sangmata_already_on": "Mikomata already enabled in your groups.",
+    "sangmata_enabled": "Mikomata enabled in your groups.",
+    "sangmata_already_off": "Mikomata already disabled in your groups.",
+    "sangmata_disabled": "Mikomata disabled in your groups.",
+    "wrong_param": "Unknown parameter, use only on/off parameter."
+}

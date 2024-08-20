@@ -44,11 +44,10 @@ START_BTN = [
         ),
     ],
     [
-        InlineKeyboardButton(text="HELP", callback_data="help_back"),
+        InlineKeyboardButton(text="HELP", callback_data="extra_command_handler"),
     ],
     [
         InlineKeyboardButton(text="DETAILS", callback_data="Miko_"),
-        InlineKeyboardButton(text="AI", callback_data="ai_handler"),
         InlineKeyboardButton(text="SOURCE", callback_data="git_source"),
     ],
     [
@@ -83,7 +82,7 @@ ALIVE_BTN = [
 ]
 
 HELP_STRINGS = """
-🫧 *Yae-Miko* 🫧
+🫧 *Yae-Miko* 🫧 [ㅤ](https://telegra.ph/file/b05535884267a19ee5c93.jpg)
 
 ☉ *Here, you will find a list of all the available commands.*
 

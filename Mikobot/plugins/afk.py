@@ -184,6 +184,12 @@ __help__ = """
 
 » brb , !afk <reason>*:* same as the afk command - but not a command.
 
+» /bye [Reason > Optional] - Tell others that you are AFK (Away From Keyboard).
+
+» /bye [reply to media] - AFK with media.
+
+» /byedel - Enable auto delete AFK message in group (Only for group admin). Default is **Enable**.
+
 ➠ *When marked as AFK, any mentions will be replied to with a message to say you're not available!*
 """
 

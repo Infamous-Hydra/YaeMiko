@@ -1,4 +1,3 @@
-# <============================================== IMPORTS =========================================================>
 import html
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
@@ -14,10 +13,7 @@ from Mikobot.plugins.helper_funcs.chat_status import check_admin
 from Mikobot.plugins.helper_funcs.extraction import extract_user
 from Mikobot.plugins.log_channel import loggable
 
-# <=======================================================================================================>
 
-
-# <================================================ FUNCTION =======================================================>
 @loggable
 @check_admin(is_user=True)
 async def approve(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -214,9 +210,6 @@ async def unapproveall_btn(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.answer("You need to be admin to do this.")
 
 
-# <=================================================== HELP ====================================================>
-
-
 __help__ = """
 ➠ Sometimes, you might trust a user not to send unwanted content.
 Maybe not enough to make them admin, but you might be ok with locks, blacklists, and antiflood not applying to them.
@@ -236,7 +229,6 @@ Maybe not enough to make them admin, but you might be ok with locks, blacklists,
 » /unapproveall: Unapprove *ALL* users in a chat. This cannot be undone.
 """
 
-# <================================================ HANDLER =======================================================>
 APPROVE = DisableAbleCommandHandler("approve", approve, block=False)
 DISAPPROVE = DisableAbleCommandHandler("unapprove", disapprove, block=False)
 APPROVED = DisableAbleCommandHandler("approved", approved, block=False)
@@ -256,4 +248,3 @@ dispatcher.add_handler(UNAPPROVEALL_BTN)
 __mod_name__ = "APPROVALS"
 __command_list__ = ["approve", "unapprove", "approved", "approval"]
 __handlers__ = [APPROVE, DISAPPROVE, APPROVED, APPROVAL]
-# <================================================ END =======================================================>

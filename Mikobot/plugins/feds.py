@@ -276,9 +276,9 @@ async def join_fed(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         getfed["fname"],
                     ),
                     parse_mode="markdown",
-                    message_thread_id=message.message_thread_id
-                    if chat.is_forum
-                    else None,
+                    message_thread_id=(
+                        message.message_thread_id if chat.is_forum else None
+                    ),
                 )
 
         await message.reply_text(
@@ -315,9 +315,11 @@ async def leave_fed(update: Update, context: ContextTypes.DEFAULT_TYPE):
                             fed_info["fname"],
                         ),
                         parse_mode="markdown",
-                        message_thread_id=update.effective_message.message_thread_id
-                        if chat.is_forum
-                        else None,
+                        message_thread_id=(
+                            update.effective_message.message_thread_id
+                            if chat.is_forum
+                            else None
+                        ),
                     )
             await send_message(
                 update.effective_message,
@@ -1246,9 +1248,11 @@ async def set_frules(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         getfed["fname"],
                     ),
                     parse_mode="markdown",
-                    message_thread_id=update.effective_message.message_thread_id
-                    if chat.is_forum
-                    else None,
+                    message_thread_id=(
+                        update.effective_message.message_thread_id
+                        if chat.is_forum
+                        else None
+                    ),
                 )
         await update.effective_message.reply_text(
             f"Rules have been changed to :\n{rules}!"
@@ -1777,9 +1781,11 @@ async def fed_import_bans(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         get_fedlog,
                         teks,
                         parse_mode="markdown",
-                        message_thread_id=update.effective_message.message_thread_id
-                        if chat.is_forum
-                        else None,
+                        message_thread_id=(
+                            update.effective_message.message_thread_id
+                            if chat.is_forum
+                            else None
+                        ),
                     )
         elif fileformat == "csv":
             multi_fed_id = []
@@ -1859,9 +1865,11 @@ async def fed_import_bans(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         get_fedlog,
                         teks,
                         parse_mode="markdown",
-                        message_thread_id=update.effective_message.message_thread_id
-                        if chat.is_forum
-                        else None,
+                        message_thread_id=(
+                            update.effective_message.message_thread_id
+                            if chat.is_forum
+                            else None
+                        ),
                     )
         else:
             await send_message(update.effective_message, "This file is not supported.")
@@ -2150,9 +2158,11 @@ async def subs_feds(update: Update, context: ContextTypes.DEFAULT_TYPE):
                             getfed["fname"],
                         ),
                         parse_mode="markdown",
-                        message_thread_id=update.effective_message.message_thread_id
-                        if chat.is_forum
-                        else None,
+                        message_thread_id=(
+                            update.effective_message.message_thread_id
+                            if chat.is_forum
+                            else None
+                        ),
                     )
         else:
             await send_message(
@@ -2224,9 +2234,11 @@ async def unsubs_feds(update: Update, context: ContextTypes.DEFAULT_TYPE):
                             getfed["fname"],
                         ),
                         parse_mode="markdown",
-                        message_thread_id=update.effective_message.message_thread_id
-                        if chat.is_forum
-                        else None,
+                        message_thread_id=(
+                            update.effective_message.message_thread_id
+                            if chat.is_forum
+                            else None
+                        ),
                     )
         else:
             await send_message(

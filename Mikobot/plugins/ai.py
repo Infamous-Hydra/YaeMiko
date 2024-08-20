@@ -16,7 +16,7 @@ from Mikobot.state import state
 # <=======================================================================================================>
 
 # <================================================ CONSTANTS =====================================================>
-API_URL = "https://lexica.qewertyy.me/models"
+API_URL = "https://lexica.qewertyy.dev/models"
 PALM_MODEL_ID = 0
 GPT_MODEL_ID = 5
 
@@ -103,7 +103,7 @@ async def upscale_image(update: Update, context: ContextTypes.DEFAULT_TYPE):
             b = base64.b64encode(f).decode("utf-8")
 
             response = await state.post(
-                "https://lexica.qewertyy.me/upscale",
+                "https://lexica.qewertyy.dev/upscale",
                 data={"image_data": b},
             )
 

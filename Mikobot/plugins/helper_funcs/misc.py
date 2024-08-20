@@ -95,7 +95,9 @@ def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
                 EqInlineKeyboardButton(
                     "◁", callback_data="{}_prev({})".format(prefix, modulo_page)
                 ),
-                EqInlineKeyboardButton("» 𝙃𝙊𝙈𝙀 «", callback_data="Miko_back"),
+                EqInlineKeyboardButton(
+                    "» 𝘽𝘼𝘾𝙆 «", callback_data="extra_command_handler"
+                ),
                 EqInlineKeyboardButton(
                     "▷", callback_data="{}_next({})".format(prefix, modulo_page)
                 ),

@@ -1,4 +1,3 @@
-# <============================================== IMPORTS =========================================================>
 import html
 
 from telegram import ChatPermissions, Update
@@ -18,10 +17,7 @@ from Mikobot.plugins.helper_funcs.string_handling import extract_time
 from Mikobot.plugins.log_channel import loggable
 from Mikobot.plugins.warns import warn
 
-# <=======================================================================================================>
 
-
-# <================================================ FUNCTION =======================================================>
 async def blackliststicker(update: Update, context: ContextTypes.DEFAULT_TYPE):
     msg = update.effective_message  # type: Optional[Message]
     chat = update.effective_chat  # type: Optional[Chat]
@@ -452,9 +448,9 @@ async def del_blackliststicker(update: Update, context: ContextTypes.DEFAULT_TYP
                             trigger,
                         ),
                         parse_mode="markdown",
-                        message_thread_id=message.message_thread_id
-                        if chat.is_forum
-                        else None,
+                        message_thread_id=(
+                            message.message_thread_id if chat.is_forum else None
+                        ),
                     )
                     return
                 elif getmode == 4:
@@ -468,9 +464,9 @@ async def del_blackliststicker(update: Update, context: ContextTypes.DEFAULT_TYP
                                 trigger,
                             ),
                             parse_mode="markdown",
-                            message_thread_id=message.message_thread_id
-                            if chat.is_forum
-                            else None,
+                            message_thread_id=(
+                                message.message_thread_id if chat.is_forum else None
+                            ),
                         )
                     return
                 elif getmode == 5:
@@ -483,9 +479,9 @@ async def del_blackliststicker(update: Update, context: ContextTypes.DEFAULT_TYP
                             trigger,
                         ),
                         parse_mode="markdown",
-                        message_thread_id=message.message_thread_id
-                        if chat.is_forum
-                        else None,
+                        message_thread_id=(
+                            message.message_thread_id if chat.is_forum else None
+                        ),
                     )
                     return
                 elif getmode == 6:
@@ -500,9 +496,9 @@ async def del_blackliststicker(update: Update, context: ContextTypes.DEFAULT_TYP
                             trigger,
                         ),
                         parse_mode="markdown",
-                        message_thread_id=message.message_thread_id
-                        if chat.is_forum
-                        else None,
+                        message_thread_id=(
+                            message.message_thread_id if chat.is_forum else None
+                        ),
                     )
                     return
                 elif getmode == 7:
@@ -522,9 +518,9 @@ async def del_blackliststicker(update: Update, context: ContextTypes.DEFAULT_TYP
                             trigger,
                         ),
                         parse_mode="markdown",
-                        message_thread_id=message.message_thread_id
-                        if chat.is_forum
-                        else None,
+                        message_thread_id=(
+                            message.message_thread_id if chat.is_forum else None
+                        ),
                     )
                     return
             except BadRequest as excp:
@@ -558,7 +554,6 @@ def __stats__():
 
 __mod_name__ = "Stickers Blacklist"
 
-# <================================================ HANDLER =======================================================>
 BLACKLIST_STICKER_HANDLER = DisableAbleCommandHandler(
     "blsticker", blackliststicker, admin_ok=True, block=False
 )
@@ -578,4 +573,3 @@ dispatcher.add_handler(ADDBLACKLIST_STICKER_HANDLER)
 dispatcher.add_handler(UNBLACKLIST_STICKER_HANDLER)
 dispatcher.add_handler(BLACKLISTMODE_HANDLER)
 dispatcher.add_handler(BLACKLIST_STICKER_DEL_HANDLER)
-# <================================================ END =======================================================>

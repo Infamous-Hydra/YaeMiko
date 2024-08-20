@@ -7,7 +7,7 @@ from Database.sql import BASE, SESSION
 
 
 class AFK(BASE):
-    __tablename__ = "afk_users"
+    __tablename__ = "afk_user"
 
     user_id = Column(BigInteger, primary_key=True)
     is_afk = Column(Boolean)

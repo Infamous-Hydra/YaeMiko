@@ -1,4 +1,3 @@
-# <============================================== IMPORTS =========================================================>
 import html
 import re
 
@@ -21,12 +20,9 @@ from Mikobot.plugins.helper_funcs.string_handling import extract_time
 from Mikobot.plugins.log_channel import loggable
 from Mikobot.plugins.warns import warn
 
-# <=======================================================================================================>
-
 BLACKLIST_GROUP = 11
 
 
-# <================================================ FUNCTION =======================================================>
 @check_admin(is_user=True)
 @typing_action
 async def blacklist(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -401,9 +397,9 @@ async def del_blacklist(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     await bot.sendMessage(
                         chat.id,
                         f"Muted {user.first_name} for using Blacklisted word: {trigger}!",
-                        message_thread_id=message.message_thread_id
-                        if chat.is_forum
-                        else None,
+                        message_thread_id=(
+                            message.message_thread_id if chat.is_forum else None
+                        ),
                     )
                     return
                 elif getmode == 4:
@@ -413,9 +409,9 @@ async def del_blacklist(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         await bot.sendMessage(
                             chat.id,
                             f"Kicked {user.first_name} for using Blacklisted word: {trigger}!",
-                            message_thread_id=message.message_thread_id
-                            if chat.is_forum
-                            else None,
+                            message_thread_id=(
+                                message.message_thread_id if chat.is_forum else None
+                            ),
                         )
                     return
                 elif getmode == 5:
@@ -424,9 +420,9 @@ async def del_blacklist(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     await bot.sendMessage(
                         chat.id,
                         f"Banned {user.first_name} for using Blacklisted word: {trigger}",
-                        message_thread_id=message.message_thread_id
-                        if chat.is_forum
-                        else None,
+                        message_thread_id=(
+                            message.message_thread_id if chat.is_forum else None
+                        ),
                     )
                     return
                 elif getmode == 6:
@@ -436,9 +432,9 @@ async def del_blacklist(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     await bot.sendMessage(
                         chat.id,
                         f"Banned {user.first_name} until '{value}' for using Blacklisted word: {trigger}!",
-                        message_thread_id=message.message_thread_id
-                        if chat.is_forum
-                        else None,
+                        message_thread_id=(
+                            message.message_thread_id if chat.is_forum else None
+                        ),
                     )
                     return
                 elif getmode == 7:
@@ -453,9 +449,9 @@ async def del_blacklist(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     await bot.sendMessage(
                         chat.id,
                         f"Muted {user.first_name} until '{value}' for using Blacklisted word: {trigger}!",
-                        message_thread_id=message.message_thread_id
-                        if chat.is_forum
-                        else None,
+                        message_thread_id=(
+                            message.message_thread_id if chat.is_forum else None
+                        ),
                     )
                     return
             except BadRequest as excp:
@@ -487,9 +483,6 @@ def __stats__():
     )
 
 
-# <=================================================== HELP ====================================================>
-
-
 __mod_name__ = "BLACKLIST"
 
 __help__ = """
@@ -517,8 +510,6 @@ Note:
 » <sticker link> can be https://t.me/addstickers/<sticker> or just <sticker> or reply to the sticker message
 
 """
-
-# <================================================ HANDLER =======================================================>
 BLACKLIST_HANDLER = DisableAbleCommandHandler(
     "blacklist", blacklist, admin_ok=True, block=False
 )
@@ -545,4 +536,3 @@ __handlers__ = [
     BLACKLISTMODE_HANDLER,
     (BLACKLIST_DEL_HANDLER, BLACKLIST_GROUP),
 ]
-# <================================================ END =======================================================>

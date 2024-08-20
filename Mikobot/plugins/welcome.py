@@ -12,7 +12,10 @@ from functools import partial
 import unidecode
 from PIL import Image, ImageChops, ImageDraw, ImageFont
 from pyrogram import filters as ft
-from pyrogram.types import ChatMemberUpdated, Message
+from pyrogram.types import ChatMemberUpdated
+from pyrogram.types import InlineKeyboardButton as IB
+from pyrogram.types import InlineKeyboardMarkup as IM
+from pyrogram.types import Message
 from telegram import ChatPermissions, InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.constants import ParseMode
 from telegram.error import BadRequest
@@ -29,6 +32,7 @@ import Database.sql.welcome_sql as sql
 from Database.mongodb.toggle_mongo import dwelcome_off, dwelcome_on, is_dwelcome_on
 from Database.sql.global_bans_sql import is_user_gbanned
 from Infamous.temp import temp
+from Mikobot import ALLOW_CHATS
 from Mikobot import DEV_USERS
 from Mikobot import DEV_USERS as SUDO
 from Mikobot import DRAGONS, EVENT_LOGS, LOGGER, OWNER_ID, app, dispatcher, function
@@ -155,10 +159,16 @@ async def member_has_joined(client, member: ChatMemberUpdated):
             welcomeimg = await welcomepic(
                 pic, user.first_name, member.chat.title, user_id
             )
+            user_username = user.username if user.username else f"user?id={user.id}"
+
+            # Create an inline keyboard with a URL button
+            inline_keyboard = IM([[IB("🔗 USER", url=f"https://t.me/{user_username}")]])
+
             temp.MELCOW[f"welcome-{chat_id}"] = await client.send_photo(
                 member.chat.id,
                 photo=welcomeimg,
-                caption=f"**𝗛𝗲𝘆❗️{mention}, 𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝗧𝗼 {member.chat.title} 𝗚𝗿𝗼𝘂𝗽.**\n\n**➖➖➖➖➖➖➖➖➖➖➖➖**\n**𝗡𝗔𝗠𝗘 : {first_name}**\n**𝗜𝗗 : {user_id}**\n**𝗗𝗔𝗧𝗘 𝗝𝗢𝗜𝗡𝗘𝗗 : {joined_date}**",
+                caption=f"**𝗛𝗲𝘆❗️{mention}, 𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝗧𝗼 {member.chat.title} 𝗚𝗿𝗼𝘂𝗽.**\n\n**𝗜𝗗 : {user_id}**\n**𝗗𝗔𝗧𝗘 𝗝𝗢𝗜𝗡𝗘𝗗 : {joined_date}**",
+                reply_markup=inline_keyboard,  # Add the inline keyboard
             )
         except Exception as e:
             print(e)
@@ -313,7 +323,7 @@ async def new_member(update: Update, context: ContextTypes.DEFAULT_TYPE):
     new_members = update.effective_message.new_chat_members
 
     for new_mem in new_members:
-        if new_mem.id == bot.id and not Mikobot.ALLOW_CHATS:
+        if new_mem.id == bot.id and not ALLOW_CHATS:
             with suppress(BadRequest):
                 await update.effective_message.reply_text(
                     "Groups are disabled for {}, I'm outta here.".format(bot.first_name)

@@ -1,4 +1,3 @@
-# <============================================== IMPORTS =========================================================>
 import html
 import re
 from typing import Optional
@@ -28,8 +27,7 @@ from telegram.helpers import mention_html
 
 from Database.sql import warns_sql as sql
 from Database.sql.approve_sql import is_approved
-from Mikobot import dispatcher, function
-from Mikobot.utils.can_restrict import BAN_STICKER
+from Mikobot import BAN_STICKER, dispatcher, function
 from Mikobot.plugins.disable import DisableAbleCommandHandler
 from Mikobot.plugins.helper_funcs.chat_status import check_admin, is_user_admin
 from Mikobot.plugins.helper_funcs.extraction import (
@@ -41,13 +39,10 @@ from Mikobot.plugins.helper_funcs.misc import split_message
 from Mikobot.plugins.helper_funcs.string_handling import split_quotes
 from Mikobot.plugins.log_channel import loggable
 
-# <=======================================================================================================>
-
 WARN_HANDLER_GROUP = 9
 CURRENT_WARNING_FILTER_STRING = "<b>Current warning filters in this chat:</b>\n"
 
 
-# <================================================ FUNCTION =======================================================>
 # Not async
 async def warn(
     user: User,
@@ -496,9 +491,6 @@ def __chat_settings__(chat_id, user_id):
     )
 
 
-# <=================================================== HELP ====================================================>
-
-
 __help__ = """
 » /warns <userhandle>: get a user's number, and reason, of warns.
 
@@ -524,7 +516,6 @@ be a sentence, encompass it with quotes, as such: `/addwarn "very angry" This is
 
 __mod_name__ = "WARN"
 
-# <================================================ HANDLER =======================================================>
 WARN_HANDLER = CommandHandler(
     ["warn", "dwarn"], warn_user, filters=filters.ChatType.GROUPS, block=False
 )
@@ -573,4 +564,3 @@ function(LIST_WARN_HANDLER)
 function(WARN_LIMIT_HANDLER)
 function(WARN_STRENGTH_HANDLER)
 function(WARN_FILTER_HANDLER, WARN_HANDLER_GROUP)
-# <================================================ END =======================================================>

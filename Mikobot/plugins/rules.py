@@ -34,9 +34,11 @@ async def send_rules(update, chat_id, from_pm=False):
                 user.id,
                 "The rules shortcut for this chat hasn't been set properly! Ask admins to "
                 "fix this.\nMaybe they forgot the hyphen in ID",
-                message_thread_id=update.effective_message.message_thread_id
-                if chat.is_forum
-                else None,
+                message_thread_id=(
+                    update.effective_message.message_thread_id
+                    if chat.is_forum
+                    else None
+                ),
             )
             return
         else:
