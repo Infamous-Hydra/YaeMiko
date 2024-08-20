@@ -70,7 +70,7 @@ python3 -m Mikobot         # 8. Run the Bot
 <p align="center">Click the button below to deploy YAE ダ MIKO on Heroku and enjoy its enhanced features and user-friendly interface!</p>
 
 <p align="center">
-    <a href="https://heroku.com/deploy?template=https://github.com/Infamous-Hydra/YaeMiko">
+    <a href="https://heroku.com/deploy?template=https://github.com/Infamous-Hydra/YaeMiko2.0">
         <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
     </a>
 </p>
@@ -78,12 +78,11 @@ python3 -m Mikobot         # 8. Run the Bot
 <h1 align="center"><img src="./.github/yae-miko.gif" /></h1>
 
 ## CREDITS
-+ [Karma](https://github.com/Infamous-Hydra)
-+ [PaulSonOfLars](https://github.com/PaulSonOfLars)
+The foundation of the application is rooted in the initial efforts undertaken by [PaulSonOfLars](https://github.com/PaulSonOfLars)
 + [lostb053](https://github.com/lostb053) > Anime
 + [TheHamkerCat](https://github.com/TheHamkerCat) > Python-Arq
 + [ProjectCodeX](https://github.com/Team-ProjectCodeX) > Modules
 
 Others in the commit history and files. If anything is missing, feel free to  [![gmail](https://img.shields.io/badge/mail-Here-red?style=for-the-badge&logo=gmail)](mailto:makandu2054@gmail.com)  or submit a pull request.
 
-> Try this bot [@YaeMiko_Roxbot](https://t.me/YaeMiko_Roxbot); it's made with this repository for demonstration purposes.
+> Try this bot [@MIKO_V2BOT](https://t.me/MIKO_V2BOT); it's made with this repository for demonstration purposes.

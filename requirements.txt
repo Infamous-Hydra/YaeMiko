@@ -1,0 +1,81 @@
+# ==== A ====
+aiofiles==24.1.0
+aiohttp==3.10.4
+APScheduler==3.10.4
+alphabet-detector==0.0.7
+asyncio==3.4.3
+
+# ==== B ====
+beautifulsoup4==4.12.3
+bleach==6.1.0
+
+# ==== C ====
+cachetools==5.5.0
+
+cockroachdb
+
+# ==== D ====
+dateparser==1.2.0
+
+# ==== E ====
+emoji==2.12.1
+emoji-country-flag==2.0.1
+
+# ==== F ====
+ffmpeg-python
+future==1.0.0
+
+# ==== G ====
+gpytranslate==1.5.1
+
+# ==== H ====
+html2text==2024.2.26
+httpx[http2]
+humanize==4.10.0
+
+# ==== J ====
+jikanpy==4.3.2
+
+# ==== L ====
+lxml==5.3.0
+
+# ==== M ====
+markdown2==2.5.0
+motor==3.5.1
+
+# ==== N ====
+nekos.py==1.1.0
+numpy>=1.23.5
+
+# ==== O ====
+opencv-python-headless==4.10.0.84
+
+# ==== P ====
+Pillow==9.5.0
+psutil==6.0.0
+pyjokes
+psycopg2-binary==2.9.9
+pynewtonmath==1.0.1
+pymongo[srv]==4.8.0
+pyrate-limiter==3.7.0
+pytz==2024.1
+python-arq==6.0.7
+pyrogram==2.0.106
+python-telegram-bot==21.4
+
+# ==== R ====
+regex==2024.7.24
+requests==2.32.3
+
+# ==== S ====
+shortuuid==1.0.13
+SQLAlchemy==1.4.52
+speedtest-cli==2.1.3
+
+# ==== T ====
+telegraph==2.2.0
+telethon==1.36.0
+tgcrypto==1.2.5
+
+# ==== U ====
+Unidecode==1.3.8
