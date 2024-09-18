@@ -41,7 +41,7 @@ lxml==5.3.0
 
 # ==== M ====
 markdown2==2.5.0
-motor==3.5.1
+motor==3.6.0
 
 # ==== N ====
 nekos.py==1.1.0
