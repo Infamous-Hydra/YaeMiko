@@ -58,7 +58,7 @@ psycopg2-binary==2.9.9
 pynewtonmath==1.0.1
 pymongo[srv]==4.9.1
 pyrate-limiter==3.7.0
-pytz==2024.1
+pytz==2024.2
 python-arq==6.0.7
 pyrogram==2.0.106
 python-telegram-bot==21.6
