@@ -7,7 +7,7 @@ asyncio==3.4.3
 
 # ==== B ====
 beautifulsoup4==4.12.3
-bleach==6.1.0
+bleach==6.2.0
 
 # ==== C ====
 cachetools==5.5.0
