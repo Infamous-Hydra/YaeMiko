@@ -51,7 +51,7 @@ numpy>=1.23.5
 opencv-python-headless==4.10.0.84
 
 # ==== P ====
-Pillow==9.5.0
+Pillow==11.0.0
 psutil==6.1.0
 pyjokes
 psycopg2-binary==2.9.10
