@@ -64,7 +64,7 @@ pyrogram==2.0.106
 python-telegram-bot==21.6
 
 # ==== R ====
-regex==2024.7.24
+regex==2024.11.6
 requests==2.32.3
 
 # ==== S ====
