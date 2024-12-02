@@ -49,7 +49,7 @@ sudo apt-get update && sudo apt-get upgrade -y           # 1. Upgrade and Update
 
 sudo apt-get install python3-pip -y          # 2. Install Required Packages
 
-sudo pip3 install -U pip          # 3. Upgrade Pip
+sudo pip3 install -U pip           # 3. Upgrade Pip
 
 git clone https://github.com/Infamous-Hydra/YaeMiko && cd YaeMiko           # 4. Clone the Repository
 
