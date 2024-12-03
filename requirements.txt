@@ -26,7 +26,7 @@ ffmpeg-python
 future==1.0.0
 
 # ==== G ====
-gpytranslate==1.5.1
+gpytranslate==2.0.0
 
 # ==== H ====
 html2text==2024.2.26
