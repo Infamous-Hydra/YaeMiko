@@ -61,7 +61,7 @@ pyrate-limiter==3.7.0
 pytz==2024.1
 python-arq==6.0.7
 pyrogram==2.0.106
-python-telegram-bot==21.6
+python-telegram-bot==21.9
 
 # ==== R ====
 regex==2024.7.24
